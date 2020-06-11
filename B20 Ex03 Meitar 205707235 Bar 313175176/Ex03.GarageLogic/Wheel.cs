@@ -19,15 +19,40 @@ namespace Ex03.GarageLogic
         public void InflateWheel(float i_AirPressureToAdd)
         {
             float newAirPressure = m_CurrentAirPressure + i_AirPressureToAdd;
-            
             if (i_AirPressureToAdd < k_MinAirPressure || newAirPressure > r_MaxAirPressure)
             {
                 throw new ValueOutOfRangeException(i_AirPressureToAdd, k_MinAirPressure, r_MaxAirPressure);
             }
-            else
+            
+            m_CurrentAirPressure += i_AirPressureToAdd;
+        }
+
+        public string Manufacturer
+        {
+            get
             {
-                m_CurrentAirPressure += i_AirPressureToAdd;
-            }           
+                return r_Manufacturer;
+            }
+        }
+
+        public float CurrentAirPressure
+        {
+            get
+            {
+                return m_CurrentAirPressure;
+            }
+            set
+            {
+                m_CurrentAirPressure = value;
+            }
+        }
+
+        public float MaxAirPressure
+        {
+            get
+            {
+                return r_MaxAirPressure;
+            }
         }
     }
 }
