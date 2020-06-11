@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    internal enum eFuelType
+    public enum eFuelType
     {
         Octane95,
         Octane96,
@@ -14,7 +14,7 @@ namespace Ex03.GarageLogic
         Soler
     }
 
-    internal enum eColor
+    public enum eColor
     {
         Red,
         Blue,
@@ -22,14 +22,14 @@ namespace Ex03.GarageLogic
         Gray
     }
 
-    internal enum eVehicleStatus
+    public enum eVehicleStatus
     {
         InRepair,
         Repaired,
         PayedFor
     }
 
-    internal enum eLicenseType
+    public enum eLicenseType
     {
         A,
         A1,

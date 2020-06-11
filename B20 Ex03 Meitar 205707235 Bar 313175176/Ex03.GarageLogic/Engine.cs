@@ -1,8 +1,13 @@
 ﻿namespace Ex03.GarageLogic
 {
-    public class Engine
+    public abstract class Engine
     {
         private ushort m_EnergyPercentage;
+
+        //public Engine(ushort i_EnergyPercentage)
+        //{
+        //    m_EnergyPercentage = i_EnergyPercentage;
+        //}
 
         public ushort EnergyPercentage
         {
@@ -10,6 +15,17 @@
             {
                 return m_EnergyPercentage;
             }
+            set
+            {
+                m_EnergyPercentage = value;
+            }
+        }
+
+        public abstract void UpdateEnergyPercantage();
+
+        public static ushort CalcEnergyPercantage(float i_CurrentEnergyAmount, float i_MaxEnergyAnount)
+        {
+            return (ushort)((i_CurrentEnergyAmount / i_MaxEnergyAnount) * 100);
         }
 
     }
