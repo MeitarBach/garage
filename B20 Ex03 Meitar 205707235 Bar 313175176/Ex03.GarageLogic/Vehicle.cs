@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    public class Vehicle
+    public abstract class Vehicle
     {
         private readonly string r_ModelName;
         private readonly string r_LicenseNumber;
@@ -109,8 +109,8 @@ namespace Ex03.GarageLogic
             StringBuilder wheelsSpecifaction = new StringBuilder();
             foreach(Wheel wheel in r_WheelsList)
             {
-                wheelsSpecifaction.Append(wheel);
                 wheelsSpecifaction.Append(Environment.NewLine);
+                wheelsSpecifaction.Append(wheel);
             }
 
             return wheelsSpecifaction.ToString();
@@ -118,14 +118,15 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
+            string ownerName = Owner == null ? string.Empty : Owner.Name;
+
             string description = string.Format(
 @"License Number: {0}
 Model: {1}
 Owner: {2}
 Status: {3}
-Tires specifications:
-{4}
-{5}", r_LicenseNumber, r_ModelName, m_Owner.Name, m_VehicleStatus, wheelsSpecification());
+Tires specifications:{4}
+{5}", r_LicenseNumber, r_ModelName, ownerName, m_VehicleStatus, wheelsSpecification(), m_Engine);
 
             return description;
         }

@@ -1,12 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ex03.GarageLogic
+﻿namespace Ex03.GarageLogic
 {
-    class Motorcycle
+    public class Motorcycle : Vehicle
     {
+        private eLicenseType m_LicenseType;
+        private int m_EngineVolume;
+
+        public Motorcycle(string i_LicenseNumber, string i_ModelName, Engine i_Engine)
+            : base(i_LicenseNumber, i_ModelName, i_Engine)
+        {
+        }
+
+        public eLicenseType LicenseType
+        {
+            get
+            {
+                return m_LicenseType;
+            }
+
+            set
+            {
+                m_LicenseType = value;
+            }
+        }
+
+        public int EngineVolume
+        {
+            get
+            {
+                return m_EngineVolume;
+            }
+            set
+            {
+                m_EngineVolume = value;
+            }
+        }
     }
 }

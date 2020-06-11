@@ -6,16 +6,9 @@
         private readonly float r_MaxTimeInHours;
         private const float k_MinTimeInHours = 0;
 
-        public ElectricEngine(float i_RemainingTimeInHours, float i_MaxTimeInHours) 
+        public ElectricEngine(float i_MaxTimeInHours) 
         {
-            if(i_RemainingTimeInHours > i_MaxTimeInHours)
-            {
-                throw new ValueOutOfRangeException(i_RemainingTimeInHours, k_MinTimeInHours, i_MaxTimeInHours);
-            }
-
-            m_RemainingTimeInHours = i_RemainingTimeInHours;
             r_MaxTimeInHours = i_MaxTimeInHours;
-            EnergyPercentage = CalcEnergyPercantage(i_RemainingTimeInHours, i_MaxTimeInHours);
         }
 
         public void Recharge(float i_HoursToCharge)
@@ -50,6 +43,12 @@
         public override void UpdateEnergyPercantage()
         {
             EnergyPercentage = CalcEnergyPercantage(m_RemainingTimeInHours, r_MaxTimeInHours);
+        }
+
+        public override string ToString()
+        {
+            return string.Format("Battery Status: {0}/{1} Hours left",
+                m_RemainingTimeInHours, r_MaxTimeInHours);
         }
     }
 }

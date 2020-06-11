@@ -9,17 +9,10 @@ namespace Ex03.GarageLogic
         private readonly float r_MaxFuelAmount;
         private const float k_MinFuelAmount = 0;
 
-        public FuelEngine(eFuelType i_FuelType, float i_CurrentFuelAmount, float i_MaxFuelAmount)
+        public FuelEngine(eFuelType i_FuelType, float i_MaxFuelAmount)
         {
-            if (i_CurrentFuelAmount > i_MaxFuelAmount)
-            {
-                throw new ValueOutOfRangeException(i_CurrentFuelAmount, k_MinFuelAmount, i_MaxFuelAmount);
-            }
-
             r_FuelType = i_FuelType;
-            m_CurrentFuelAmount = i_CurrentFuelAmount;
             r_MaxFuelAmount = i_MaxFuelAmount;
-            EnergyPercentage = CalcEnergyPercantage(i_CurrentFuelAmount, i_MaxFuelAmount);
         }
 
         public void Refuel(float i_FuelToAdd, eFuelType i_FuelType)
@@ -68,6 +61,12 @@ namespace Ex03.GarageLogic
         public override void UpdateEnergyPercantage()
         {
             EnergyPercentage = CalcEnergyPercantage(m_CurrentFuelAmount, r_MaxFuelAmount);
+        }
+
+        public override string ToString()
+        {
+            return string.Format("Fuel Status: {0}/{1} Liters of type {2}",
+                                 m_CurrentFuelAmount, r_MaxFuelAmount, r_FuelType);
         }
     }
 }
