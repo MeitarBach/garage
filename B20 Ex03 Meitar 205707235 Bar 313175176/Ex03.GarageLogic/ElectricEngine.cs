@@ -20,12 +20,7 @@
 
         public void Recharge(float i_HoursToCharge)
         {
-            if(i_HoursToCharge < k_MinTimeInHours)
-            {
-                throw new ValueOutOfRangeException(i_HoursToCharge, k_MinTimeInHours,
-                    r_MaxTimeInHours - m_RemainingTimeInHours);
-            }
-
+            Validation.ValidRange(i_HoursToCharge, k_MinTimeInHours, r_MaxTimeInHours);
             RemainingTimeInHours += i_HoursToCharge;
         }
 
@@ -38,12 +33,7 @@
 
             set
             {
-                if (value < k_MinTimeInHours || value > r_MaxTimeInHours)
-                {
-                    throw new ValueOutOfRangeException(value, k_MinTimeInHours,
-                        r_MaxTimeInHours - m_RemainingTimeInHours);
-                }
-
+                Validation.ValidRange(value, k_MinTimeInHours, r_MaxTimeInHours);
                 m_RemainingTimeInHours = value;
                 UpdateEnergyPercantage();
             }

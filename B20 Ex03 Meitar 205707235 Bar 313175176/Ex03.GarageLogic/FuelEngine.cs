@@ -26,15 +26,11 @@ namespace Ex03.GarageLogic
         {
             if(i_FuelType != r_FuelType)
             {
-                throw new ArgumentException(String.Format("Wrong Fuel Type, this engine runs on {0}", r_FuelType));
+                throw new ArgumentException(String.Format("Wrong Fuel Type, this engine runs on {0}, but you entered {1}",
+                                             r_FuelType, i_FuelType));
             }
 
-            if (i_FuelToAdd < k_MinFuelAmount)
-            {
-                throw new ValueOutOfRangeException(i_FuelToAdd, k_MinFuelAmount,
-                    r_MaxFuelAmount - m_CurrentFuelAmount);
-            }
-
+            Validation.ValidRange(i_FuelToAdd, k_MinFuelAmount, r_MaxFuelAmount);
             CurrentFuelAmount += i_FuelToAdd;
         }
 
@@ -55,12 +51,7 @@ namespace Ex03.GarageLogic
 
             set
             {
-                if (value > r_MaxFuelAmount || value < 0)
-                {
-                    throw new ValueOutOfRangeException(value, k_MinFuelAmount,
-                        r_MaxFuelAmount - m_CurrentFuelAmount);
-                }
-
+                Validation.ValidRange(value, k_MinFuelAmount, r_MaxFuelAmount);
                 m_CurrentFuelAmount = value;
                 UpdateEnergyPercantage();
             }

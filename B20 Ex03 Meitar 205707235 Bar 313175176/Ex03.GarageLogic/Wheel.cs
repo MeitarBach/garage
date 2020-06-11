@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace Ex03.GarageLogic
 {
@@ -18,12 +19,7 @@ namespace Ex03.GarageLogic
 
         public void InflateWheel(float i_AirPressureToAdd)
         {
-            if (i_AirPressureToAdd < k_MinAirPressure)
-            {
-                throw new ValueOutOfRangeException(i_AirPressureToAdd, k_MinAirPressure,
-                    r_MaxAirPressure - m_CurrentAirPressure);
-            }
-
+            Validation.ValidRange(i_AirPressureToAdd, k_MinAirPressure, r_MaxAirPressure);
             CurrentAirPressure += i_AirPressureToAdd;
         }
 
@@ -43,12 +39,7 @@ namespace Ex03.GarageLogic
             }
             set
             {
-                if (value < k_MinAirPressure || value > r_MaxAirPressure)
-                {
-                    throw new ValueOutOfRangeException(value, k_MinAirPressure,
-                        r_MaxAirPressure - m_CurrentAirPressure);
-                }
-
+                Validation.ValidRange(value, k_MinAirPressure, r_MaxAirPressure);
                 m_CurrentAirPressure = value;
             }
         }
