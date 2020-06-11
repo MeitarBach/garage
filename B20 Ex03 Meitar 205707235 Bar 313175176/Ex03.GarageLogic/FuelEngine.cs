@@ -35,7 +35,7 @@ namespace Ex03.GarageLogic
                     r_MaxFuelAmount - m_CurrentFuelAmount);
             }
 
-            CurrentFuelAmount = m_CurrentFuelAmount + i_FuelToAdd;
+            CurrentFuelAmount += i_FuelToAdd;
         }
 
         public eFuelType FuelType

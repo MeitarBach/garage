@@ -26,7 +26,7 @@
                     r_MaxTimeInHours - m_RemainingTimeInHours);
             }
 
-            RemainingTimeInHours = m_RemainingTimeInHours + i_HoursToCharge;
+            RemainingTimeInHours += i_HoursToCharge;
         }
 
         public float RemainingTimeInHours

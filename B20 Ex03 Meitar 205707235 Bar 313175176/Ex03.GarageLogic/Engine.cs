@@ -4,11 +4,6 @@
     {
         private ushort m_EnergyPercentage;
 
-        //public Engine(ushort i_EnergyPercentage)
-        //{
-        //    m_EnergyPercentage = i_EnergyPercentage;
-        //}
-
         public ushort EnergyPercentage
         {
             get
