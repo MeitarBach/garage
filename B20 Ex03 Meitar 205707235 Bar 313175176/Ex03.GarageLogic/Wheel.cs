@@ -51,5 +51,10 @@ namespace Ex03.GarageLogic
                 return r_MaxAirPressure;
             }
         }
+
+        public override string ToString()
+        {
+            return string.Format("Manufacturer: {0},  Air Pressure: {1}", r_Manufacturer, m_CurrentAirPressure);
+        }
     }
 }

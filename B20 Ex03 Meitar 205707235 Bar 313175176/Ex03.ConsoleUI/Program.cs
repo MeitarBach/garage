@@ -9,6 +9,16 @@ namespace Ex03.ConsoleUI
         {
             Wheel wheel = new Wheel("Michelin", 28, 30);
             
+            //// Vehicle Test
+            
+
+
+            //// Owner Test
+            VehicleOwner bar = new VehicleOwner("bar", "056 ואת השאר תנחש");
+            Console.WriteLine(bar.PhoneNumber + "\n" + bar.Name);
+            Console.ReadLine();
+
+
             //// Wheel Tests
             //Console.WriteLine(wheel.Manufacturer);
             //Console.ReadLine();
