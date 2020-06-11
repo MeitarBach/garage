@@ -119,7 +119,6 @@ namespace Ex03.GarageLogic
         public override string ToString()
         {
             string ownerName = Owner == null ? string.Empty : Owner.Name;
-
             string description = string.Format(
 @"License Number: {0}
 Model: {1}
