@@ -17,12 +17,7 @@ namespace Ex03.GarageLogic
 
         public void Refuel(float i_FuelToAdd, eFuelType i_FuelType)
         {
-            if(i_FuelType != r_FuelType)
-            {
-                throw new ArgumentException(String.Format("Wrong Fuel Type, this engine runs on {0}, but you entered {1}",
-                                             r_FuelType, i_FuelType));
-            }
-
+            Validation.ValidFuelType(i_FuelType, r_FuelType);
             Validation.ValidRange(i_FuelToAdd, k_MinFuelAmount, r_MaxFuelAmount);
             CurrentFuelAmount += i_FuelToAdd;
         }
