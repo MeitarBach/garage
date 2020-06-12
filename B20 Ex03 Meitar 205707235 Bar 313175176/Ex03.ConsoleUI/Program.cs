@@ -7,6 +7,9 @@ namespace Ex03.ConsoleUI
     {
         public static void Main()
         {
+            new MainMenu();
+
+
             //// CreateVehicle Test
             VehicleFactory factory = new VehicleFactory();
             Vehicle electricCar = factory.CreateVehicle("123", "ibiza", eVehicleType.FuelBasedCar);

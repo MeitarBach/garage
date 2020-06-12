@@ -41,5 +41,19 @@ namespace Ex03.GarageLogic
                 m_VolumeOfCargo = value;
             }
         }
+
+        public string ContainsDagerousMaterialsOrNot()
+        {
+            string containsOrNot = m_ContainsDangerousMaterials ? "contains" : "doesn't contain";
+
+            return containsOrNot;
+        }
+
+        public override string ToString()
+        {
+            return string.Format(base.ToString() + Environment.NewLine +
+@"The truck {0} dagerous materials
+Volume of Cargo: {1}", ContainsDagerousMaterialsOrNot(), m_VolumeOfCargo);
+        }
     }
 }
