@@ -9,6 +9,10 @@ namespace Ex03.ConsoleUI
         {
             new MainMenu().OpenGarage();
 
+            //Console.WriteLine(Enum.GetNames(typeof(eVehicleStatus)).Length);
+            //Console.WriteLine(Enum.GetNames(typeof(eVehicleStatus))[0]);
+            //Console.WriteLine(Enum.GetValues(typeof(eVehicleStatus)));
+            //Console.ReadLine();
 
             ////// CreateVehicle Test
             //VehicleFactory factory = new VehicleFactory();

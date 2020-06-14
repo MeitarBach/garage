@@ -10,6 +10,7 @@ namespace Ex03.GarageLogic
         private readonly string r_LicenseNumber;
         private readonly List<Wheel> r_WheelsList;
         private VehicleOwner m_Owner;
+        private eVehicleType m_VehicleType;
         private eVehicleStatus m_VehicleStatus;
         private Engine m_Engine;
 
@@ -62,7 +63,7 @@ namespace Ex03.GarageLogic
         {
             for(int i = 0; i < i_NumOfWheels; i++)
             {
-                r_WheelsList[i] = new Wheel(i_WheelMaxPressure);
+                r_WheelsList.Add(new Wheel(i_WheelMaxPressure));
             }
         }
 
@@ -87,6 +88,18 @@ namespace Ex03.GarageLogic
             set
             {
                 m_VehicleStatus = value;
+            }
+        }
+
+        public eVehicleType VehicleType
+        {
+            get
+            {
+                return m_VehicleType;
+            }
+            set
+            {
+                m_VehicleType = value;
             }
         }
 

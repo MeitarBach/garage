@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Text;
+using Ex03.GarageLogic;
 
 namespace B20_Ex02
 {
@@ -15,8 +17,8 @@ namespace B20_Ex02
 6. Display vehicle information";
         private const string k_InsertLicneseNumber = "Insert vehicle License Number";
         private const string k_ChooseVehicleType = "Choose your vehicle type:";
-        private const string k_NameContainsSpaces = "Invalid Name: Contains spaces";
-        private const string k_InvalidOpponent = "Invalid Oponnent: Choose 1/2";
+        private const string k_InsertModelName = "Insert vehicle's Model:";
+        private const string k_VehicleIsInGarage = "The vehicle is already in the garage";
         private const string k_EnterBoardWidth = "Please enter the board's width: (4-6)";
         private const string k_EnterBoardHeight = "Please enter the board's height: (4-6)";
         private const string k_NotANumber = "Invalid input: Not a Number";
@@ -35,9 +37,24 @@ namespace B20_Ex02
         private const string k_InvalidPlayAnotherGame = "Invalid input: insert: YES/NO";
         private const string k_GoodBye = "Thanks for playing, See you later :-)";
 
-        internal static void InvalidOptionRange(ushort i_MaxOptionNumber)
+        internal static void InvalidOptionRange(int i_MaxOptionNumber)
         {
             Console.WriteLine("Invalid option range, choose an option between 1-{0}", i_MaxOptionNumber);
+        }
+
+        internal static void ListVehicleTypes()
+        {
+            StringBuilder vehicleTypesStringBuilder = new StringBuilder();
+
+            int i = 1;
+            foreach(string vehicleType in Enum.GetNames(typeof(eVehicleType)))
+            {
+                vehicleTypesStringBuilder.Append(string.Format("{0}. {1}", i, vehicleType));
+                vehicleTypesStringBuilder.Append(Environment.NewLine);
+                i++;
+            }
+
+            Console.WriteLine(vehicleTypesStringBuilder.ToString());
         }
 
         internal static string Welcome
@@ -72,19 +89,19 @@ namespace B20_Ex02
             }
         }
         
-        internal static string NameContainsSpaces
+        internal static string InsertModelName
         {
             get
             {
-                return k_NameContainsSpaces;
+                return k_InsertModelName;
             }
         }
         
-        internal static string InvalidOpponent
+        internal static string VehicleIsInGarage
         {
             get
             {
-                return k_InvalidOpponent;
+                return k_VehicleIsInGarage;
             }
         }
 
@@ -226,6 +243,7 @@ namespace B20_Ex02
 
         internal static void DisplayMessage(string i_Msg)
         {
+            Console.Clear();
             Console.WriteLine(i_Msg);
         }
     }
