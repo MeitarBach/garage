@@ -11,6 +11,8 @@ namespace Ex03.ConsoleUI
     internal class MainMenu
     {
         private const ushort k_MaxOptionsMainMenu = 6;
+        private const ushort k_MaxOptionsDisplayListOfVehiclesInGgarage = 2;
+        private const ushort k_MaxOptionseVehicleStatus = 3;
         private readonly GarageManager r_GarageManager = new GarageManager();
         private readonly VehicleFactory r_VehicleFactory = new VehicleFactory();
 
@@ -33,8 +35,10 @@ namespace Ex03.ConsoleUI
             switch(option)
             {
                 case 1:
+                    insertVehicle();
                     break;
                 case 2:
+                    DisplayListOfVehiclesIGgarage();
                     break;
                 case 3:
                     break;
@@ -59,6 +63,7 @@ namespace Ex03.ConsoleUI
                     break;
                 }
 
+                Console.Clear();
                 MessageDisplayer.InvalidOptionRange(i_MaxOptionNumber);
             }
 
@@ -96,6 +101,28 @@ namespace Ex03.ConsoleUI
         {
             Console.WriteLine("Press any key to continue...");
             Console.ReadLine();
+        }
+
+        public void DisplayListOfVehiclesIGgarage()
+        {
+            ushort option = getOptionFromUser(k_MaxOptionsDisplayListOfVehiclesInGgarage);
+            string listOfVehiclesToDisplay;
+
+            MessageDisplayer.DisplayMessage(InsertTypeOfListToDisplay);
+            Console.Clear();
+            if (option == 1)
+            {
+                listOfVehiclesToDisplay =  r_GarageManager.DisplayAllVehicles();
+            }
+            else
+            {
+                MessageDisplayer.DisplayMessage(MessageDisplayer.InsertTypeOfSpecificList);
+                listOfVehiclesToDisplay = r_GarageManager.DisplayVehiclesByStatus((eVehicleStatus)getOptionFromUser(k_MaxOptionseVehicleStatus));
+            }
+
+            Console.Clear();
+            MessageDisplayer.DisplayMessage(listOfVehiclesToDisplay);
+            enterToContinue();
         }
     }
 }
