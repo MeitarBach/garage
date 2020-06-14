@@ -5,15 +5,13 @@ namespace Ex03.GarageLogic
 {
     public class Wheel
     {
-        private readonly string r_Manufacturer;
+        private string m_Manufacturer;
         private float m_CurrentAirPressure;
         private readonly float r_MaxAirPressure;
         private const float k_MinAirPressure = 0;
 
-        public Wheel(string i_Manufacturer, float i_CurrentAirPressure, float i_MaxAirPressure)
+        public Wheel(float i_MaxAirPressure)
         {
-            r_Manufacturer = i_Manufacturer;
-            m_CurrentAirPressure = i_CurrentAirPressure;
             r_MaxAirPressure = i_MaxAirPressure;
         } 
 
@@ -27,7 +25,11 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return r_Manufacturer;
+                return m_Manufacturer;
+            }
+            set
+            {
+                m_Manufacturer = value;
             }
         }
 
@@ -54,7 +56,7 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return string.Format("Manufacturer: {0},  Air Pressure: {1}", r_Manufacturer, m_CurrentAirPressure);
+            return string.Format("Manufacturer: {0},  Air Pressure: {1}", m_Manufacturer, m_CurrentAirPressure);
         }
     }
 }

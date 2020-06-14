@@ -8,5 +8,6 @@ namespace Ex03.ConsoleUI
 {
     class ValidationUI
     {
+
     }
 }

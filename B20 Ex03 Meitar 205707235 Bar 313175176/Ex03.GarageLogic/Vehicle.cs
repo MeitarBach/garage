@@ -58,6 +58,14 @@ namespace Ex03.GarageLogic
             }
         }
 
+        public void AddWheels(int i_NumOfWheels, float i_WheelMaxPressure)
+        {
+            for(int i = 0; i < i_NumOfWheels; i++)
+            {
+                r_WheelsList[i] = new Wheel(i_WheelMaxPressure);
+            }
+        }
+
         public VehicleOwner Owner
         {
             get

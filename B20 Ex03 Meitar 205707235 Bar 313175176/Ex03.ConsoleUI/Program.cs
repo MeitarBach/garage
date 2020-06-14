@@ -7,15 +7,15 @@ namespace Ex03.ConsoleUI
     {
         public static void Main()
         {
-            new MainMenu();
+            new MainMenu().OpenGarage();
 
 
-            //// CreateVehicle Test
-            VehicleFactory factory = new VehicleFactory();
-            Vehicle electricCar = factory.CreateVehicle("123", "ibiza", eVehicleType.FuelBasedCar);
-            //electricCar.Owner = new VehicleOwner("bar", "056ADFA");
-            Console.WriteLine(electricCar);
-            Console.ReadLine();
+            ////// CreateVehicle Test
+            //VehicleFactory factory = new VehicleFactory();
+            //Vehicle electricCar = factory.CreateVehicle("123", "ibiza", eVehicleType.FuelBasedCar);
+            ////electricCar.Owner = new VehicleOwner("bar", "056ADFA");
+            //Console.WriteLine(electricCar);
+            //Console.ReadLine();
 
 
             //// Vehicle TEST
@@ -31,7 +31,7 @@ namespace Ex03.ConsoleUI
 
 
 
-            Wheel wheel = new Wheel("Michelin", 28, 30);
+            //Wheel wheel = new Wheel("Michelin", 28, 30);
             //// Owner Test
             //VehicleOwner bar = new VehicleOwner("bar", "056 ואת השאר תנחש");
             //Console.WriteLine(bar.PhoneNumber + "\n" + bar.Name);

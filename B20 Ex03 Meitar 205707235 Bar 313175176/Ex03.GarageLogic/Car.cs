@@ -5,7 +5,7 @@ namespace Ex03.GarageLogic
     public class Car : Vehicle
     {
         private eColor m_Color;
-        private readonly eNumOfDoors r_NumOfDoors;
+        private eNumOfDoors m_NumOfDoors;
 
         public Car(string i_LicenseNumber, string i_ModelName, Engine i_Engine)
             : base(i_LicenseNumber, i_ModelName, i_Engine)
@@ -28,7 +28,11 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return r_NumOfDoors;
+                return m_NumOfDoors;
+            }
+            set
+            {
+                m_NumOfDoors = value;
             }
         }
 
@@ -36,7 +40,7 @@ namespace Ex03.GarageLogic
         {
             return string.Format(base.ToString() + Environment.NewLine +
 @"Car Color: {0}
-Number Of Doors: {1}", m_Color, r_NumOfDoors);
+Number Of Doors: {1}", m_Color, m_NumOfDoors);
         }
     }
 }
