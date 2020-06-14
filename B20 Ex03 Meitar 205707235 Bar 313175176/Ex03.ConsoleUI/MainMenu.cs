@@ -106,38 +106,70 @@ namespace Ex03.ConsoleUI
         private void setVehicleProperties(Vehicle i_Vehicle)
         {
             i_Vehicle.VehicleStatus = eVehicleStatus.InRepair;
-            setEnergy(i_Vehicle);
-            setWheels(i_Vehicle);
+            Dictionary<string, string> emptyParametersDictionary =
+                r_VehicleFactory.GetEmptyParameterDictionary(i_Vehicle.VehicleType);
 
-            switch(i_Vehicle.VehicleType)
+            foreach(string parameterKey in emptyParametersDictionary.Keys)
             {
-                case eVehicleType.ElectricCar:
-                case eVehicleType.FuelBasedCar:
-                    setColor(i_Vehicle);
-                    setNumOfDoors(i_Vehicle);
-                    break;
-                case eVehicleType.ElectricMotorcycle:
-                case eVehicleType.FuelBasedMotorcycle:
-                    setLicenseType(i_Vehicle);
-                    setEngineVolume(i_Vehicle);
-                    break;
-                case eVehicleType.FuelBasedTruck:
-                    setDangerousMaterials(i_Vehicle);
+                bool v_InvalidInput = true;
+
+                while(v_InvalidInput)
+                {
+                    Console.WriteLine("Please enter {0}:", parameterKey);
+                    string parameterValue = Console.ReadLine();
+
+                    try
+                    {
+                        r_VehicleFactory.SetFieldValue(i_Vehicle, parameterKey, parameterValue);
+                        Console.WriteLine(i_Vehicle);
+                        break;
+                    }
+                    catch(ValueOutOfRangeException e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                    catch(FormatException e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
+                
             }
 
-            setOwner(i_Vehicle);
+
+
+            //setEnergy(i_Vehicle);
+            //setWheels(i_Vehicle);
+
+            //switch(i_Vehicle.VehicleType)
+            //{
+            //    case eVehicleType.ElectricCar:
+            //    case eVehicleType.FuelBasedCar:
+            //        setColor(i_Vehicle);
+            //        setNumOfDoors(i_Vehicle);
+            //        break;
+            //    case eVehicleType.ElectricMotorcycle:
+            //    case eVehicleType.FuelBasedMotorcycle:
+            //        setLicenseType(i_Vehicle);
+            //        setEngineVolume(i_Vehicle);
+            //        break;
+            //    case eVehicleType.FuelBasedTruck:
+            //        setDangerousMaterials(i_Vehicle);
+            //}
+
+            //setOwner(i_Vehicle);
         }
 
-        AskForAdditionalInfo(eVehicleType i_VehicleType)
-        {
-            List<string> aditionalParmas = r_VehicleFactory.WhatToAskFor(i_VehicleType);
-            foreach(string paramKey in aditionalParmas)
-            {
-                MessageDisplayer.DisplayMessage(string.Format("Please enter {0}:", paramKey));
-                string paramValue = Console.ReadLine();
-                r_VehicleFactory.SendParameter(i_VehicleType, paramKey, paramValue);
-            }
-        }
+        //AskForAdditionalInfo(eVehicleType i_VehicleType)
+        //{
+        //    List<string> aditionalParmas = r_VehicleFactory.WhatToAskFor(i_VehicleType);
+        //    foreach(string paramKey in aditionalParmas)
+        //    {
+        //        MessageDisplayer.DisplayMessage(string.Format("Please enter {0}:", paramKey));
+        //        string paramValue = Console.ReadLine();
+        //        r_VehicleFactory.SendParameter(i_VehicleType, paramKey, paramValue);
+        //    }
+        //}
 
         private void enterToContinue()
         {

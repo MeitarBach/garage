@@ -36,5 +36,17 @@ namespace Ex03.GarageLogic
                                                                 i_ExpectedFuelType, i_EnteredFuelType));
             }
         }
+
+        public static float ValidateAndParseFloat(string i_FieldValue)
+        {
+            float floatNumber;
+
+            if (!float.TryParse(i_FieldValue, out floatNumber))
+            {
+                throw new FormatException("Not a valid fuel amount");
+            }
+
+            return floatNumber;
+        }
     }
 }

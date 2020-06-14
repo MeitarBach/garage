@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Ex03.GarageLogic
 {
@@ -49,6 +50,29 @@ namespace Ex03.GarageLogic
             return vehicle;
         }
 
+        public void SetFieldValue(Vehicle i_Vehicle, string i_FieldKey, string i_FieldValue)
+        {
+            switch(i_FieldKey)
+            {
+                case "Current Fuel Amount":
+                    float currentFuelAmount = Validation.ValidateAndParseFloat(i_FieldValue);
+                    (i_Vehicle.Engine as FuelEngine).CurrentFuelAmount = currentFuelAmount;
+                    break;
+                case "Time left in Battery":
+                    float currentTimeInBattery = Validation.ValidateAndParseFloat(i_FieldValue);
+                    (i_Vehicle.Engine as FuelEngine).CurrentFuelAmount = currentTimeInBattery;
+                    break;
+                case "Volume of Cargo":
+                    float volumeOfCargo = Validation.ValidateAndParseFloat(i_FieldValue);
+                    (i_Vehicle as Truck).VolumeOfCargo = volumeOfCargo;
+                    break;
+                case "Wheel Pressure":
+                    float wheelsPressure = Validation.ValidateAndParseFloat(i_FieldValue);
+                    i_Vehicle.SetWheelsPressure(wheelsPressure);
+                    break;
+            }
+        }
+
         private Engine createEngine(eVehicleType i_VehicleType)
         {
             Engine engine = null;
@@ -73,6 +97,66 @@ namespace Ex03.GarageLogic
             }
 
             return engine;
+        }
+
+        private Dictionary<string, string> getEmptyParameterDictionary()
+        {
+            Dictionary<string, string> parameterDictionary =
+                new Dictionary<string, string>()
+                    {
+                        {"Current Fuel Amount", string.Empty},
+                        //{"Owner Name", string.Empty},
+                        //{"Owner Phone", string.Empty},
+                        //{"Wheel Manufacturer", string.Empty},
+                        {"Wheel Pressure", string.Empty}
+                    };
+
+            return parameterDictionary;
+        }
+
+        private Dictionary<string, string> getEmptyParameterDictionary(eVehicleType i_VehicleType)
+        {
+            Dictionary<string, string> parameterDictionary = getEmptyParameterDictionary();
+
+            switch(i_VehicleType)
+            {
+                case eVehicleType.ElectricCar:
+                case eVehicleType.FuelBasedCar:
+                    //parameterDictionary.Add("Color", string.Empty);
+                    //parameterDictionary.Add("Number Of Doors", string.Empty);
+                    break;
+                case eVehicleType.ElectricMotorcycle:
+                case eVehicleType.FuelBasedMotorcycle:
+                    //parameterDictionary.Add("License Type", string.Empty);
+                    //parameterDictionary.Add("Engine Volume", string.Empty);
+                    break;
+                case eVehicleType.FuelBasedTruck:
+                    parameterDictionary.Add("Contains Dangerous Materials", string.Empty);
+                    parameterDictionary.Add("Volume of Cargo", string.Empty);
+                    break;
+            }
+
+            return parameterDictionary;
+        }
+
+        public Dictionary<string, string> GetEmptyParameterDictionary(eVehicleType i_VehicleType)
+        {
+            Dictionary<string, string> parameterDictionary = getEmptyParameterDictionary(i_VehicleType);
+
+            switch (i_VehicleType)
+            {
+                case eVehicleType.FuelBasedCar:
+                case eVehicleType.FuelBasedMotorcycle:
+                case eVehicleType.FuelBasedTruck:
+                    //parameterDictionary.Add("Current Fuel Amount ", string.Empty);
+                    break;
+                case eVehicleType.ElectricCar:
+                case eVehicleType.ElectricMotorcycle:
+                    parameterDictionary.Add("Time left in Battery", string.Empty);
+                    break;
+            }
+
+            return parameterDictionary;
         }
 
         private void addWheels(Vehicle i_Vehicle, eVehicleType i_VehicleType)
