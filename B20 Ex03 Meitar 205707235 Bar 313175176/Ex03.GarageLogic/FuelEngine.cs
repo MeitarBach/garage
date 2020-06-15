@@ -60,8 +60,7 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return string.Format("Fuel Status: {0}/{1} Liters of type {2}",
-                                 m_CurrentFuelAmount, r_MaxFuelAmount, r_FuelType);
+            return string.Format("Fuel Status: {0}/{1} Liters of type {2}", m_CurrentFuelAmount, r_MaxFuelAmount, r_FuelType);
         }
     }
 }

@@ -22,6 +22,5 @@
         {
             return (i_CurrentEnergyAmount / i_MaxEnergyAnount) * 100;
         }
-
     }
 }

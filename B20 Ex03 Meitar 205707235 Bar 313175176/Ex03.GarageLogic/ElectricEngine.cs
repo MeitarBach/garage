@@ -1,4 +1,6 @@
-﻿namespace Ex03.GarageLogic
+﻿using System;
+
+namespace Ex03.GarageLogic
 {
     public class ElectricEngine : Engine
     {
@@ -47,8 +49,7 @@
 
         public override string ToString()
         {
-            return string.Format("Battery Status: {0}/{1} Hours left",
-                m_RemainingTimeInHours, r_MaxTimeInHours);
+            return string.Format("Battery Status: {0}/{1} Hours left", m_RemainingTimeInHours, r_MaxTimeInHours);
         }
     }
 }

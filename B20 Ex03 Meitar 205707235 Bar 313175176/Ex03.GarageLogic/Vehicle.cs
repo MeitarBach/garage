@@ -165,7 +165,8 @@ Model: {2}
 Owner: {3}
 Status: {4}
 Tires specifications:{5}
-{6}", r_LicenseNumber, m_VehicleType, r_ModelName, ownerName, m_VehicleStatus, wheelsSpecification(), m_Engine);
+{6}
+Energy Percentage:{7:0.00}%", r_LicenseNumber, m_VehicleType, r_ModelName, ownerName, m_VehicleStatus, wheelsSpecification(), m_Engine, RemainingEnergyPercentage);
 
             return description;
         }
