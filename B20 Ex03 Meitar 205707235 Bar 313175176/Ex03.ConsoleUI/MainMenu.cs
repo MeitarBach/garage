@@ -20,14 +20,14 @@ namespace Ex03.ConsoleUI
         {
             bool garageIsActive = true;
 
-            MessageDisplayer.DisplayMessage(MessageDisplayer.Welcome);
+            MessageDisplayer.ClearAndDisplayMessage(MessageDisplayer.Welcome);
             while (garageIsActive)
             {
                 garageIsActive = displayOptions();
                 Console.Clear();
             }
 
-            MessageDisplayer.DisplayMessage(MessageDisplayer.GoodBye);
+            MessageDisplayer.ClearAndDisplayMessage(MessageDisplayer.GoodBye);
             Thread.Sleep(2000);
         }
 
@@ -85,14 +85,14 @@ namespace Ex03.ConsoleUI
 
         private void insertVehicle()
         {
-            MessageDisplayer.DisplayMessage(MessageDisplayer.InsertLicneseNumber);
+            MessageDisplayer.ClearAndDisplayMessage(MessageDisplayer.InsertLicneseNumber);
             string licenseNumber = Console.ReadLine();
             Vehicle vehicle;
 
             if (!r_GarageManager.FindVehicle(licenseNumber, out vehicle))
             {
                 eVehicleType vehicleType = getVehicleTypeFromUser();
-                MessageDisplayer.DisplayMessage(MessageDisplayer.InsertModelName);
+                MessageDisplayer.ClearAndDisplayMessage(MessageDisplayer.InsertModelName);
                 string modelName = Console.ReadLine();
                 vehicle = r_VehicleFactory.CreateVehicle(licenseNumber, modelName, vehicleType);
                 vehicle.VehicleType = vehicleType;
@@ -100,7 +100,7 @@ namespace Ex03.ConsoleUI
             }
             else
             {
-                MessageDisplayer.DisplayMessage(MessageDisplayer.VehicleIsInGarage);
+                MessageDisplayer.ClearAndDisplayMessage(MessageDisplayer.VehicleIsInGarage);
             }
 
             setVehicleProperties(vehicle);
@@ -108,7 +108,7 @@ namespace Ex03.ConsoleUI
 
         private eVehicleType getVehicleTypeFromUser()
         {
-            MessageDisplayer.DisplayMessage(MessageDisplayer.ChooseVehicleType);
+            MessageDisplayer.ClearAndDisplayMessage(MessageDisplayer.ChooseVehicleType);
             Console.WriteLine(EnumOperations.ListEnumValues<eVehicleType>(k_EnumListWithNumbers));
             int numOfVehicleTypes = Enum.GetNames(typeof(eVehicleType)).Length;
             int vehicleTypeChosen = getOptionFromUser(numOfVehicleTypes);
@@ -148,7 +148,7 @@ namespace Ex03.ConsoleUI
                 
             }
 
-            MessageDisplayer.DisplayMessage(MessageDisplayer.InsertedVehicle);
+            MessageDisplayer.ClearAndDisplayMessage(MessageDisplayer.InsertedVehicle);
             Console.WriteLine(i_Vehicle.ToString());
             enterToContinue();
         }
@@ -161,13 +161,13 @@ namespace Ex03.ConsoleUI
 
         private void printAndEnterToContinue(string i_Msg)
         {
-            MessageDisplayer.DisplayMessage(i_Msg);
+            MessageDisplayer.ClearAndDisplayMessage(i_Msg);
             enterToContinue();
         }
 
         private void displayListOfVehiclesInGarage()
         {
-            MessageDisplayer.DisplayMessage(MessageDisplayer.SelectListType);
+            MessageDisplayer.ClearAndDisplayMessage(MessageDisplayer.SelectListType);
             int option = getOptionFromUser(k_TwoOptions);
             string listOfVehiclesToDisplay = string.Empty;
 
@@ -177,7 +177,7 @@ namespace Ex03.ConsoleUI
                     listOfVehiclesToDisplay = r_GarageManager.DisplayAllVehicles();
                     break;
                 case 2:
-                    MessageDisplayer.DisplayMessage(MessageDisplayer.SelectSpecificList);
+                    MessageDisplayer.ClearAndDisplayMessage(MessageDisplayer.SelectSpecificList);
                     Console.WriteLine(EnumOperations.ListEnumValues<eVehicleStatus>(k_EnumListWithNumbers));
                     eVehicleStatus statusOfVehiclesToShow = (eVehicleStatus)getOptionFromUser(r_NumOfVehicleStatuses);
                     listOfVehiclesToDisplay = r_GarageManager.DisplayVehiclesByStatus(statusOfVehiclesToShow);
@@ -200,7 +200,7 @@ namespace Ex03.ConsoleUI
             {
                 bool v_InvalidInput = true;
 
-                MessageDisplayer.DisplayMessage(MessageDisplayer.SelectVehicleStatus);
+                MessageDisplayer.ClearAndDisplayMessage(MessageDisplayer.SelectVehicleStatus);
                 Console.WriteLine(EnumOperations.ListEnumValues<eVehicleStatus>(k_EnumListWithNumbers));
                 while (v_InvalidInput)
                 {
@@ -208,7 +208,7 @@ namespace Ex03.ConsoleUI
                     try
                     {
                         r_GarageManager.ChangeVehicleStatus(licenseNumber, (eVehicleStatus)newStatus);
-                        MessageDisplayer.DisplayMessage(MessageDisplayer.StatusHasBeenChanged);
+                        MessageDisplayer.ClearAndDisplayMessage(MessageDisplayer.StatusHasBeenChanged);
                         break;
                     }
                     catch (FormatException e)
@@ -219,7 +219,7 @@ namespace Ex03.ConsoleUI
             }
             else
             {
-                MessageDisplayer.DisplayMessage(MessageDisplayer.VehicleIsNotInGarage);
+                MessageDisplayer.ClearAndDisplayMessage(MessageDisplayer.VehicleIsNotInGarage);
             }
 
             enterToContinue();
@@ -237,7 +237,7 @@ namespace Ex03.ConsoleUI
 
         private void fillEnergy()
         {
-            MessageDisplayer.DisplayMessage(MessageDisplayer.RefuelOrRecharge);
+            MessageDisplayer.ClearAndDisplayMessage(MessageDisplayer.RefuelOrRecharge);
             int option = getOptionFromUser(k_TwoOptions);
             string licenseNumber = insertLicenseNumber();
 
@@ -255,7 +255,7 @@ namespace Ex03.ConsoleUI
             }
             else
             {
-                 MessageDisplayer.DisplayMessage(MessageDisplayer.VehicleIsNotInGarage);
+                 MessageDisplayer.ClearAndDisplayMessage(MessageDisplayer.VehicleIsNotInGarage);
             }
         }
 
@@ -263,10 +263,10 @@ namespace Ex03.ConsoleUI
         {
             try
             {
-                MessageDisplayer.DisplayMessage(MessageDisplayer.SelectFuelType);
+                MessageDisplayer.ClearAndDisplayMessage(MessageDisplayer.SelectFuelType);
                 Console.WriteLine(EnumOperations.ListEnumValues<eFuelType>(k_EnumListWithNumbers));
                 eFuelType fuelChoice = (eFuelType)getOptionFromUser(r_NumOfFuelTypes);
-                MessageDisplayer.DisplayMessage(MessageDisplayer.EnterFuelAmount);
+                MessageDisplayer.ClearAndDisplayMessage(MessageDisplayer.EnterFuelAmount);
                 float fuelToAdd;
 
                 while(!float.TryParse(Console.ReadLine(), out fuelToAdd))
@@ -275,11 +275,11 @@ namespace Ex03.ConsoleUI
                 }
 
                 r_GarageManager.RefuleVehicle(i_LicenseNumber, fuelChoice, fuelToAdd);
-                MessageDisplayer.DisplayMessage(MessageDisplayer.RefueledSuccessfully);
+                MessageDisplayer.ClearAndDisplayMessage(MessageDisplayer.RefueledSuccessfully);
             }
             catch(Exception e)
             {
-                MessageDisplayer.DisplayMessage(e.Message);
+                MessageDisplayer.ClearAndDisplayMessage(e.Message);
             }
             
             enterToContinue();
@@ -289,7 +289,7 @@ namespace Ex03.ConsoleUI
         {
             try
             {
-                MessageDisplayer.DisplayMessage(MessageDisplayer.EnterMinutesToCharge);
+                MessageDisplayer.ClearAndDisplayMessage(MessageDisplayer.EnterMinutesToCharge);
                 float minutesToCharge;
 
                 while (!float.TryParse(Console.ReadLine(), out minutesToCharge))
@@ -298,11 +298,11 @@ namespace Ex03.ConsoleUI
                 }
 
                 r_GarageManager.RechargeVehicle(i_LicenseNumber, minutesToCharge);
-                MessageDisplayer.DisplayMessage(MessageDisplayer.RechargedSuccesfully);
+                MessageDisplayer.ClearAndDisplayMessage(MessageDisplayer.RechargedSuccesfully);
             }
             catch (Exception e)
             {
-                MessageDisplayer.DisplayMessage(e.Message);
+                MessageDisplayer.ClearAndDisplayMessage(e.Message);
             }
 
             enterToContinue();
@@ -321,7 +321,7 @@ namespace Ex03.ConsoleUI
 
         private string insertLicenseNumber()
         {
-            MessageDisplayer.DisplayMessage(MessageDisplayer.InsertLicneseNumber);
+            MessageDisplayer.ClearAndDisplayMessage(MessageDisplayer.InsertLicneseNumber);
             return Console.ReadLine();
         }
     }

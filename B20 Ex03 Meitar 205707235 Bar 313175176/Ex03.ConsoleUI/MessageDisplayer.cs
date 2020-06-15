@@ -48,23 +48,6 @@ namespace B20_Ex02
             Console.WriteLine("Invalid option range, choose an option between 1-{0}", i_MaxOptionNumber);
         }
 
-        //internal static string ListEnumValues<T>()
-        //{
-        //    StringBuilder enumValuesStringBuilder = new StringBuilder();
-        //    string[] enumValues = Enum.GetNames(typeof(T));
-
-        //    for (int i = 0; i < enumValues.Length; i++)
-        //    {
-        //        enumValuesStringBuilder.Append(string.Format("{0}. {1}", i + 1, enumValues[i]));
-        //        if (enumValues.Length - 1 != i)
-        //        {
-        //            enumValuesStringBuilder.Append(Environment.NewLine);
-        //        }
-        //    }
-
-        //    return enumValuesStringBuilder.ToString();
-        //}
-
         internal static string Welcome
         {
             get
@@ -241,7 +224,7 @@ namespace B20_Ex02
             }
         }
 
-        internal static void DisplayMessage(string i_Msg)
+        internal static void ClearAndDisplayMessage(string i_Msg)
         {
             Console.Clear();
             Console.WriteLine(i_Msg);

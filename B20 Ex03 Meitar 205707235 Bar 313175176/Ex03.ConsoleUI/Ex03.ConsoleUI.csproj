@@ -39,7 +39,6 @@
     <Compile Include="MainMenu.cs" />
     <Compile Include="MessageDisplayer.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="ValidationUI.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ex03.GarageLogic\Ex03.GarageLogic.csproj">
