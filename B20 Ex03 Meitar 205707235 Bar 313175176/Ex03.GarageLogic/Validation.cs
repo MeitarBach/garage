@@ -53,7 +53,7 @@ namespace Ex03.GarageLogic
 
             if (!float.TryParse(i_FloatValue, out floatNumber))
             {
-                throw new FormatException("Unvalid choice. Please enter a number");
+                throw new FormatException("Invalid choice. Please enter a number");
             }
 
             return floatNumber;
@@ -65,7 +65,7 @@ namespace Ex03.GarageLogic
 
             if (!int.TryParse(i_FloatValue, out intNumber))
             {
-                throw new FormatException("Unvalid choice. Please enter an integer number");
+                throw new FormatException("Invalid choice. Please enter an integer number");
             }
 
             return intNumber;
@@ -83,7 +83,7 @@ namespace Ex03.GarageLogic
                     boolValue = !boolValue;
                     break;
                 default:
-                    throw new FormatException("Unvalid choice. Please enter Yes / No");
+                    throw new FormatException("Invalid choice. Please enter Yes / No");
             }
 
             return boolValue;
@@ -95,7 +95,8 @@ namespace Ex03.GarageLogic
 
             if(!Enum.TryParse<T>(i_EnumValue, out enumValue) || !Enum.GetNames(typeof(T)).Contains(i_EnumValue))
             {
-                throw new FormatException(string.Format("Unvalid Choice. Enter one of the following: {0}", GarageManager.ListEnumValues<T>()));
+                bool enumListWithNumbers = false;
+                throw new FormatException(string.Format("Invalid Choice. Enter one of the following: {0}", EnumOperations.ListEnumValues<T>(enumListWithNumbers)));
             }
 
             return enumValue;

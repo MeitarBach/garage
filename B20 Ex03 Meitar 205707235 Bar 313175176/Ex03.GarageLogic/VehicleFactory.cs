@@ -67,11 +67,11 @@ namespace Ex03.GarageLogic
                     float wheelsPressure = Validation.ValidateAndParseFloat(i_FieldValue);
                     i_Vehicle.SetWheelsPressure(wheelsPressure);
                     break;
-                case "Current Fuel Amount":
+                case "Current Fuel Amount (liters)":
                     float currentFuelAmount = Validation.ValidateAndParseFloat(i_FieldValue);
                     (i_Vehicle.Engine as FuelEngine).CurrentFuelAmount = currentFuelAmount;
                     break;
-                case "Time left in Battery":
+                case "Time left in Battery (hours)":
                     float currentTimeInBattery = Validation.ValidateAndParseFloat(i_FieldValue);
                     (i_Vehicle.Engine as ElectricEngine).RemainingTimeInHours = currentTimeInBattery;
                     break;
@@ -139,11 +139,11 @@ namespace Ex03.GarageLogic
                 case eVehicleType.FuelBasedCar:
                 case eVehicleType.FuelBasedMotorcycle:
                 case eVehicleType.FuelBasedTruck:
-                    parameterList.Add("Current Fuel Amount");
+                    parameterList.Add("Current Fuel Amount (liters)");
                     break;
                 case eVehicleType.ElectricCar:
                 case eVehicleType.ElectricMotorcycle:
-                    parameterList.Add("Time left in Battery");
+                    parameterList.Add("Time left in Battery (hours)");
                     break;
             }
 

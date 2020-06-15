@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using B20_Ex02;
 using Ex03.GarageLogic;
 
@@ -10,27 +8,34 @@ namespace Ex03.ConsoleUI
 {
     internal class MainMenu
     {
-        private const int k_SixOptions = 6;
+        private const int k_MenuNumberOfOptions = 7;
         private const int k_TwoOptions = 2;
-        private const int k_ThreeOptions = 3;
+        private const bool k_EnumListWithNumbers = true;
+        private readonly int r_NumOfVehicleStatuses = Enum.GetNames(typeof(eVehicleStatus)).Length;
+        private readonly int r_NumOfFuelTypes = Enum.GetNames(typeof(eFuelType)).Length;
         private readonly GarageManager r_GarageManager = new GarageManager();
         private readonly VehicleFactory r_VehicleFactory = new VehicleFactory();
 
         internal void OpenGarage()
         {
-            const bool v_GarageIsActive = true;
+            bool garageIsActive = true;
 
             MessageDisplayer.DisplayMessage(MessageDisplayer.Welcome);
-            while (v_GarageIsActive)
+            while (garageIsActive)
             {
-                displayOptions();
+                garageIsActive = displayOptions();
+                Console.Clear();
             }
+
+            MessageDisplayer.DisplayMessage(MessageDisplayer.GoodBye);
+            Thread.Sleep(2000);
         }
 
-        private void displayOptions()
+        private bool displayOptions()
         {
-            MessageDisplayer.DisplayMessage(MessageDisplayer.MainMenuMessage);
-            int option = getOptionFromUser(k_SixOptions);
+            Console.WriteLine(MessageDisplayer.MainMenuMessage);
+            int option = getOptionFromUser(k_MenuNumberOfOptions);
+            bool userWantToStay = true;
 
             switch (option)
             {
@@ -38,17 +43,26 @@ namespace Ex03.ConsoleUI
                     insertVehicle();
                     break;
                 case 2:
-                    DisplayListOfVehiclesInGgarage();
+                    displayListOfVehiclesInGarage();
                     break;
                 case 3:
+                    changeVehicleStatus();
                     break;
                 case 4:
+                    inflateAllTiresToMax();
                     break;
                 case 5:
+                    fillEnergy();
                     break;
                 case 6:
+                    displayVehicleInformation();
+                    break;
+                case 7:
+                    userWantToStay = !userWantToStay;
                     break;
             }
+
+            return userWantToStay;
         }
 
         private int getOptionFromUser(int i_MaxOptionNumber)
@@ -95,7 +109,7 @@ namespace Ex03.ConsoleUI
         private eVehicleType getVehicleTypeFromUser()
         {
             MessageDisplayer.DisplayMessage(MessageDisplayer.ChooseVehicleType);
-            MessageDisplayer.ListEnumValues<eVehicleType>();
+            Console.WriteLine(EnumOperations.ListEnumValues<eVehicleType>(k_EnumListWithNumbers));
             int numOfVehicleTypes = Enum.GetNames(typeof(eVehicleType)).Length;
             int vehicleTypeChosen = getOptionFromUser(numOfVehicleTypes);
             eVehicleType vehicleType = (eVehicleType)vehicleTypeChosen;
@@ -145,26 +159,170 @@ namespace Ex03.ConsoleUI
             Console.ReadLine();
         }
 
-        public void DisplayListOfVehiclesInGgarage()
+        private void printAndEnterToContinue(string i_Msg)
         {
-            MessageDisplayer.DisplayMessage(MessageDisplayer.SortedOrUnsortedList);
-            int option = getOptionFromUser(k_TwoOptions);
-            string listOfVehiclesToDisplay;
+            MessageDisplayer.DisplayMessage(i_Msg);
+            enterToContinue();
+        }
 
-            switch(option)
+        private void displayListOfVehiclesInGarage()
+        {
+            MessageDisplayer.DisplayMessage(MessageDisplayer.SelectListType);
+            int option = getOptionFromUser(k_TwoOptions);
+            string listOfVehiclesToDisplay = string.Empty;
+
+            switch (option)
             {
                 case 1:
                     listOfVehiclesToDisplay = r_GarageManager.DisplayAllVehicles();
                     break;
                 case 2:
-                    MessageDisplayer.DisplayMessage(MessageDisplayer.InsertTypeOfSpecificList);
-                    listOfVehiclesToDisplay =
-                        r_GarageManager.DisplayVehiclesByStatus((eVehicleStatus)getOptionFromUser(k_ThreeOptions));
+                    MessageDisplayer.DisplayMessage(MessageDisplayer.SelectSpecificList);
+                    Console.WriteLine(EnumOperations.ListEnumValues<eVehicleStatus>(k_EnumListWithNumbers));
+                    eVehicleStatus statusOfVehiclesToShow = (eVehicleStatus)getOptionFromUser(r_NumOfVehicleStatuses);
+                    listOfVehiclesToDisplay = r_GarageManager.DisplayVehiclesByStatus(statusOfVehiclesToShow);
                     break;
             }
 
-            MessageDisplayer.DisplayMessage(listOfVehiclesToDisplay);
+            if(listOfVehiclesToDisplay == string.Empty)
+            {
+                listOfVehiclesToDisplay = MessageDisplayer.EmptyList;
+            }
+            printAndEnterToContinue(listOfVehiclesToDisplay);
+        }
+
+        private void changeVehicleStatus()
+        {
+            string licenseNumber = insertLicenseNumber();
+            Vehicle vehicle;
+
+            if (r_GarageManager.FindVehicle(licenseNumber, out vehicle))
+            {
+                bool v_InvalidInput = true;
+
+                MessageDisplayer.DisplayMessage(MessageDisplayer.SelectVehicleStatus);
+                Console.WriteLine(EnumOperations.ListEnumValues<eVehicleStatus>(k_EnumListWithNumbers));
+                while (v_InvalidInput)
+                {
+                    int newStatus = getOptionFromUser(r_NumOfVehicleStatuses);
+                    try
+                    {
+                        r_GarageManager.ChangeVehicleStatus(licenseNumber, (eVehicleStatus)newStatus);
+                        MessageDisplayer.DisplayMessage(MessageDisplayer.StatusHasBeenChanged);
+                        break;
+                    }
+                    catch (FormatException e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
+            }
+            else
+            {
+                MessageDisplayer.DisplayMessage(MessageDisplayer.VehicleIsNotInGarage);
+            }
+
             enterToContinue();
+        }
+
+        private void inflateAllTiresToMax()
+        {
+            string licenseNumber = insertLicenseNumber();
+            bool filledTiresSuccesfully = r_GarageManager.FillTiresToMaximum(licenseNumber);
+            string succeededToFillAllTires = filledTiresSuccesfully ? 
+                                                 MessageDisplayer.FilledAllTires : MessageDisplayer.VehicleIsNotInGarage;
+
+            printAndEnterToContinue(succeededToFillAllTires);
+        }
+
+        private void fillEnergy()
+        {
+            MessageDisplayer.DisplayMessage(MessageDisplayer.RefuelOrRecharge);
+            int option = getOptionFromUser(k_TwoOptions);
+            string licenseNumber = insertLicenseNumber();
+
+            if (r_GarageManager.FindVehicle(licenseNumber, out Vehicle vehicle))
+            {
+                switch(option)
+                {
+                    case 1:
+                        refuleVehicle(licenseNumber);
+                        break;
+                    case 2:
+                        rechargeVehicle(licenseNumber);
+                        break;
+                }
+            }
+            else
+            {
+                 MessageDisplayer.DisplayMessage(MessageDisplayer.VehicleIsNotInGarage);
+            }
+        }
+
+        private void refuleVehicle(string i_LicenseNumber)
+        {
+            try
+            {
+                MessageDisplayer.DisplayMessage(MessageDisplayer.SelectFuelType);
+                Console.WriteLine(EnumOperations.ListEnumValues<eFuelType>(k_EnumListWithNumbers));
+                eFuelType fuelChoice = (eFuelType)getOptionFromUser(r_NumOfFuelTypes);
+                MessageDisplayer.DisplayMessage(MessageDisplayer.EnterFuelAmount);
+                float fuelToAdd;
+
+                while(!float.TryParse(Console.ReadLine(), out fuelToAdd))
+                {
+                    Console.WriteLine(MessageDisplayer.InvalidNumberInserted);
+                }
+
+                r_GarageManager.RefuleVehicle(i_LicenseNumber, fuelChoice, fuelToAdd);
+                MessageDisplayer.DisplayMessage(MessageDisplayer.RefueledSuccessfully);
+            }
+            catch(Exception e)
+            {
+                MessageDisplayer.DisplayMessage(e.Message);
+            }
+            
+            enterToContinue();
+        }
+
+        private void rechargeVehicle(string i_LicenseNumber)
+        {
+            try
+            {
+                MessageDisplayer.DisplayMessage(MessageDisplayer.EnterMinutesToCharge);
+                float minutesToCharge;
+
+                while (!float.TryParse(Console.ReadLine(), out minutesToCharge))
+                {
+                    Console.WriteLine(MessageDisplayer.InvalidNumberInserted);
+                }
+
+                r_GarageManager.RechargeVehicle(i_LicenseNumber, minutesToCharge);
+                MessageDisplayer.DisplayMessage(MessageDisplayer.RechargedSuccesfully);
+            }
+            catch (Exception e)
+            {
+                MessageDisplayer.DisplayMessage(e.Message);
+            }
+
+            enterToContinue();
+        }
+
+        private void displayVehicleInformation()
+        {
+            string licenseNumber = insertLicenseNumber();
+            Vehicle vehicle;
+            string vehicleDescription = r_GarageManager.FindVehicle(licenseNumber, out vehicle)
+                                            ? vehicle.ToString()
+                                            : MessageDisplayer.VehicleIsNotInGarage;
+
+            printAndEnterToContinue(vehicleDescription);
+        }
+
+        private string insertLicenseNumber()
+        {
+            MessageDisplayer.DisplayMessage(MessageDisplayer.InsertLicneseNumber);
+            return Console.ReadLine();
         }
     }
 }

@@ -13,7 +13,7 @@
 
         public void Recharge(float i_HoursToCharge)
         {
-            Validation.ValidRange(i_HoursToCharge, k_MinTimeInHours, r_MaxTimeInHours);
+            Validation.ValidRange(i_HoursToCharge * 60, k_MinTimeInHours, (r_MaxTimeInHours - m_RemainingTimeInHours) * 60); // The time is inserted in minutes
             RemainingTimeInHours += i_HoursToCharge;
         }
 

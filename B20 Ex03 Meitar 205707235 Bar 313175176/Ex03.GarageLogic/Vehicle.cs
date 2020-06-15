@@ -160,11 +160,12 @@ namespace Ex03.GarageLogic
             string ownerName = Owner == null ? string.Empty : Owner.Name;
             string description = string.Format(
 @"License Number: {0}
-Model: {1}
-Owner: {2}
-Status: {3}
-Tires specifications:{4}
-{5}", r_LicenseNumber, r_ModelName, ownerName, m_VehicleStatus, wheelsSpecification(), m_Engine);
+Vehicle Type: {1}
+Model: {2}
+Owner: {3}
+Status: {4}
+Tires specifications:{5}
+{6}", r_LicenseNumber, m_VehicleType, r_ModelName, ownerName, m_VehicleStatus, wheelsSpecification(), m_Engine);
 
             return description;
         }

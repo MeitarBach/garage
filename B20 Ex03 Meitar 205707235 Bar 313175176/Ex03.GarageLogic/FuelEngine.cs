@@ -18,7 +18,7 @@ namespace Ex03.GarageLogic
         public void Refuel(float i_FuelToAdd, eFuelType i_FuelType)
         {
             Validation.ValidFuelType(i_FuelType, r_FuelType);
-            Validation.ValidRange(i_FuelToAdd, k_MinFuelAmount, r_MaxFuelAmount);
+            Validation.ValidRange(i_FuelToAdd, k_MinFuelAmount, r_MaxFuelAmount - m_CurrentFuelAmount);
             CurrentFuelAmount += i_FuelToAdd;
         }
 

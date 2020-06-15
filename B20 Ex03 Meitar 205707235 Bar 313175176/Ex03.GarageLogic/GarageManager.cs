@@ -34,8 +34,8 @@ namespace Ex03.GarageLogic
             {
                 if(vehicle.VehicleStatus == i_Status)
                 {
-                    vehiclesStringBuilder.Append(Environment.NewLine);
                     vehiclesStringBuilder.Append(vehicle.LicenseNumber);
+                    vehiclesStringBuilder.Append(Environment.NewLine);
                 }
             }
 
@@ -58,7 +58,7 @@ namespace Ex03.GarageLogic
             Vehicle vehicle;
             bool vehicleInGarage = FindVehicle(i_LicenseNumber, out vehicle);
 
-            if(vehicleInGarage)
+            if (vehicleInGarage)
             {
                 vehicle.VehicleStatus = i_NewStatus;
             }
@@ -100,32 +100,6 @@ namespace Ex03.GarageLogic
             (vehicle.Engine as ElectricEngine).Recharge(hoursToCharge);
 
             return vehicleInGarage;
-        }
-
-        public string GetVehicleDescription(string i_LicneseNumber) // Maybe in UI
-        {
-            Vehicle vehicle;
-            string vehicleDescription = "Vehicle is not in garage";
-
-            if(FindVehicle(i_LicneseNumber, out vehicle))
-            {
-                vehicleDescription = vehicle.ToString();
-            }
-
-            return vehicleDescription;
-        }
-
-        internal static string ListEnumValues<T>()
-        {
-            StringBuilder enumValuesStringBuilder = new StringBuilder();
-
-            foreach (string enumValue in Enum.GetNames(typeof(T)))
-            {
-                enumValuesStringBuilder.Append(Environment.NewLine);
-                enumValuesStringBuilder.Append(enumValue);
-            }
-
-            return enumValuesStringBuilder.ToString();
         }
     }
 }
