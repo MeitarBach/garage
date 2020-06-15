@@ -10,9 +10,9 @@ namespace Ex03.ConsoleUI
 {
     internal class MainMenu
     {
-        private const int k_MaxOptionsMainMenu = 6;
-        private const int k_MaxOptionsDisplayListOfVehiclesInGgarage = 2;
-        private const int k_MaxOptionseVehicleStatus = 3;
+        private const int k_SixOptions = 6;
+        private const int k_TwoOptions = 2;
+        private const int k_ThreeOptions = 3;
         private readonly GarageManager r_GarageManager = new GarageManager();
         private readonly VehicleFactory r_VehicleFactory = new VehicleFactory();
 
@@ -30,7 +30,7 @@ namespace Ex03.ConsoleUI
         private void displayOptions()
         {
             MessageDisplayer.DisplayMessage(MessageDisplayer.MainMenuMessage);
-            int option = getOptionFromUser(k_MaxOptionsMainMenu);
+            int option = getOptionFromUser(k_SixOptions);
 
             switch (option)
             {
@@ -38,7 +38,7 @@ namespace Ex03.ConsoleUI
                     insertVehicle();
                     break;
                 case 2:
-                    //DisplayListOfVehiclesIGgarage();
+                    DisplayListOfVehiclesInGgarage();
                     break;
                 case 3:
                     break;
@@ -137,41 +137,7 @@ namespace Ex03.ConsoleUI
             MessageDisplayer.DisplayMessage(MessageDisplayer.InsertedVehicle);
             Console.WriteLine(i_Vehicle.ToString());
             enterToContinue();
-
-
-
-            //setEnergy(i_Vehicle);
-            //setWheels(i_Vehicle);
-
-            //switch(i_Vehicle.VehicleType)
-            //{
-            //    case eVehicleType.ElectricCar:
-            //    case eVehicleType.FuelBasedCar:
-            //        setColor(i_Vehicle);
-            //        setNumOfDoors(i_Vehicle);
-            //        break;
-            //    case eVehicleType.ElectricMotorcycle:
-            //    case eVehicleType.FuelBasedMotorcycle:
-            //        setLicenseType(i_Vehicle);
-            //        setEngineVolume(i_Vehicle);
-            //        break;
-            //    case eVehicleType.FuelBasedTruck:
-            //        setDangerousMaterials(i_Vehicle);
-            //}
-
-            //setOwner(i_Vehicle);
         }
-
-        //AskForAdditionalInfo(eVehicleType i_VehicleType)
-        //{
-        //    List<string> aditionalParmas = r_VehicleFactory.WhatToAskFor(i_VehicleType);
-        //    foreach(string paramKey in aditionalParmas)
-        //    {
-        //        MessageDisplayer.DisplayMessage(string.Format("Please enter {0}:", paramKey));
-        //        string paramValue = Console.ReadLine();
-        //        r_VehicleFactory.SendParameter(i_VehicleType, paramKey, paramValue);
-        //    }
-        //}
 
         private void enterToContinue()
         {
@@ -179,26 +145,26 @@ namespace Ex03.ConsoleUI
             Console.ReadLine();
         }
 
-        //public void DisplayListOfVehiclesIGgarage()
-        //{
-        //    int option = getOptionFromUser(k_MaxOptionsDisplayListOfVehiclesInGgarage);
-        //    string listOfVehiclesToDisplay;
+        public void DisplayListOfVehiclesInGgarage()
+        {
+            MessageDisplayer.DisplayMessage(MessageDisplayer.SortedOrUnsortedList);
+            int option = getOptionFromUser(k_TwoOptions);
+            string listOfVehiclesToDisplay;
 
-        //    MessageDisplayer.DisplayMessage(InsertTypeOfListToDisplay);
-        //    Console.Clear();
-        //    if (option == 1)
-        //    {
-        //        listOfVehiclesToDisplay = r_GarageManager.DisplayAllVehicles();
-        //    }
-        //    else
-        //    {
-        //        MessageDisplayer.DisplayMessage(MessageDisplayer.InsertTypeOfSpecificList);
-        //        listOfVehiclesToDisplay = r_GarageManager.DisplayVehiclesByStatus((eVehicleStatus)getOptionFromUser(k_MaxOptionseVehicleStatus));
-        //    }
+            switch(option)
+            {
+                case 1:
+                    listOfVehiclesToDisplay = r_GarageManager.DisplayAllVehicles();
+                    break;
+                case 2:
+                    MessageDisplayer.DisplayMessage(MessageDisplayer.InsertTypeOfSpecificList);
+                    listOfVehiclesToDisplay =
+                        r_GarageManager.DisplayVehiclesByStatus((eVehicleStatus)getOptionFromUser(k_ThreeOptions));
+                    break;
+            }
 
-        //    Console.Clear();
-        //    MessageDisplayer.DisplayMessage(listOfVehiclesToDisplay);
-        //    enterToContinue();
-        //}
+            MessageDisplayer.DisplayMessage(listOfVehiclesToDisplay);
+            enterToContinue();
+        }
     }
 }
