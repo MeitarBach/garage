@@ -54,21 +54,50 @@ namespace Ex03.GarageLogic
         {
             switch(i_FieldKey)
             {
+                case "Owner Name":
+                    i_Vehicle.Owner.Name = i_FieldValue;
+                    break;
+                case "Owner Phone Number":
+                    i_Vehicle.Owner.PhoneNumber = i_FieldValue;
+                    break;
+                case "Wheels Manufacturer":
+                    i_Vehicle.SetWheelsManufacturer(i_FieldValue);
+                    break;
+                case "Wheels Pressure":
+                    float wheelsPressure = Validation.ValidateAndParseFloat(i_FieldValue);
+                    i_Vehicle.SetWheelsPressure(wheelsPressure);
+                    break;
                 case "Current Fuel Amount":
                     float currentFuelAmount = Validation.ValidateAndParseFloat(i_FieldValue);
                     (i_Vehicle.Engine as FuelEngine).CurrentFuelAmount = currentFuelAmount;
                     break;
                 case "Time left in Battery":
                     float currentTimeInBattery = Validation.ValidateAndParseFloat(i_FieldValue);
-                    (i_Vehicle.Engine as FuelEngine).CurrentFuelAmount = currentTimeInBattery;
+                    (i_Vehicle.Engine as ElectricEngine).RemainingTimeInHours = currentTimeInBattery;
+                    break;
+                case "Color":
+                    eColor color = Validation.ValidateAndParseEnum<eColor>(i_FieldValue);
+                    (i_Vehicle as Car).Color = color;
+                    break;
+                case "Number Of Doors":
+                    eNumOfDoors numOfDoors = Validation.ValidateAndParseEnum<eNumOfDoors>(i_FieldValue);
+                    (i_Vehicle as Car).NumOfDoors = numOfDoors;
+                    break;
+                case "License Type":
+                    eLicenseType licenseType = Validation.ValidateAndParseEnum<eLicenseType>(i_FieldValue);
+                    (i_Vehicle as Motorcycle).LicenseType = licenseType;
+                    break;
+                case "Engine Volume":
+                    int engineVolume = Validation.ValidateAndParseInt(i_FieldValue);
+                    (i_Vehicle as Motorcycle).EngineVolume = engineVolume;
+                    break;
+                case "if it Contains Dangerous Materials":
+                    bool containsDangerousMaterials = Validation.ValidateAndParseBool(i_FieldValue);
+                    (i_Vehicle as Truck).ContainsDangerousMaterials = containsDangerousMaterials;
                     break;
                 case "Volume of Cargo":
                     float volumeOfCargo = Validation.ValidateAndParseFloat(i_FieldValue);
                     (i_Vehicle as Truck).VolumeOfCargo = volumeOfCargo;
-                    break;
-                case "Wheel Pressure":
-                    float wheelsPressure = Validation.ValidateAndParseFloat(i_FieldValue);
-                    i_Vehicle.SetWheelsPressure(wheelsPressure);
                     break;
             }
         }
@@ -99,64 +128,52 @@ namespace Ex03.GarageLogic
             return engine;
         }
 
-        private Dictionary<string, string> getEmptyParameterDictionary()
+        private List<string> getBasicParametersList(eVehicleType i_VehicleType)
         {
-            Dictionary<string, string> parameterDictionary =
-                new Dictionary<string, string>()
-                    {
-                        {"Current Fuel Amount", string.Empty},
-                        //{"Owner Name", string.Empty},
-                        //{"Owner Phone", string.Empty},
-                        //{"Wheel Manufacturer", string.Empty},
-                        {"Wheel Pressure", string.Empty}
-                    };
-
-            return parameterDictionary;
-        }
-
-        private Dictionary<string, string> getEmptyParameterDictionary(eVehicleType i_VehicleType)
-        {
-            Dictionary<string, string> parameterDictionary = getEmptyParameterDictionary();
-
-            switch(i_VehicleType)
-            {
-                case eVehicleType.ElectricCar:
-                case eVehicleType.FuelBasedCar:
-                    //parameterDictionary.Add("Color", string.Empty);
-                    //parameterDictionary.Add("Number Of Doors", string.Empty);
-                    break;
-                case eVehicleType.ElectricMotorcycle:
-                case eVehicleType.FuelBasedMotorcycle:
-                    //parameterDictionary.Add("License Type", string.Empty);
-                    //parameterDictionary.Add("Engine Volume", string.Empty);
-                    break;
-                case eVehicleType.FuelBasedTruck:
-                    parameterDictionary.Add("Contains Dangerous Materials", string.Empty);
-                    parameterDictionary.Add("Volume of Cargo", string.Empty);
-                    break;
-            }
-
-            return parameterDictionary;
-        }
-
-        public Dictionary<string, string> GetEmptyParameterDictionary(eVehicleType i_VehicleType)
-        {
-            Dictionary<string, string> parameterDictionary = getEmptyParameterDictionary(i_VehicleType);
+            //// Basic user display parameters
+            List<string> parameterList =
+                new List<string>() { "Owner Name", "Owner Phone Number", "Wheels Manufacturer", "Wheels Pressure" };
 
             switch (i_VehicleType)
             {
                 case eVehicleType.FuelBasedCar:
                 case eVehicleType.FuelBasedMotorcycle:
                 case eVehicleType.FuelBasedTruck:
-                    //parameterDictionary.Add("Current Fuel Amount ", string.Empty);
+                    parameterList.Add("Current Fuel Amount");
                     break;
                 case eVehicleType.ElectricCar:
                 case eVehicleType.ElectricMotorcycle:
-                    parameterDictionary.Add("Time left in Battery", string.Empty);
+                    parameterList.Add("Time left in Battery");
                     break;
             }
 
-            return parameterDictionary;
+            return parameterList;
+        }
+
+        public List<string> GetExtendedParametersList(eVehicleType i_VehicleType)
+        {
+            //// Basic user display parameters + specific parameters for each vehicle
+            List<string> parameterList = getBasicParametersList(i_VehicleType);
+
+            switch (i_VehicleType)
+            {
+                case eVehicleType.ElectricCar:
+                case eVehicleType.FuelBasedCar:
+                    parameterList.Add("Color");
+                    parameterList.Add("Number Of Doors");
+                    break;
+                case eVehicleType.ElectricMotorcycle:
+                case eVehicleType.FuelBasedMotorcycle:
+                    parameterList.Add("License Type");
+                    parameterList.Add("Engine Volume");
+                    break;
+                case eVehicleType.FuelBasedTruck:
+                    parameterList.Add("if it Contains Dangerous Materials");
+                    parameterList.Add("Volume of Cargo");
+                    break;
+            }
+
+            return parameterList;
         }
 
         private void addWheels(Vehicle i_Vehicle, eVehicleType i_VehicleType)

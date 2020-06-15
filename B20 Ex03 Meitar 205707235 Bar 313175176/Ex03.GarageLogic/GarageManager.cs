@@ -114,5 +114,18 @@ namespace Ex03.GarageLogic
 
             return vehicleDescription;
         }
+
+        internal static string ListEnumValues<T>()
+        {
+            StringBuilder enumValuesStringBuilder = new StringBuilder();
+
+            foreach (string enumValue in Enum.GetNames(typeof(T)))
+            {
+                enumValuesStringBuilder.Append(Environment.NewLine);
+                enumValuesStringBuilder.Append(enumValue);
+            }
+
+            return enumValuesStringBuilder.ToString();
+        }
     }
 }

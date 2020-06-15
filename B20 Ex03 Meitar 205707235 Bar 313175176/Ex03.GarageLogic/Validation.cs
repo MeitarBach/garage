@@ -1,14 +1,24 @@
 ﻿using System;
+using System.Linq;
+using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    class Validation
+    internal class Validation
     {
         public static void ValidRange(float i_Value, float i_MinValue, float i_MaxValue)
         {
             if (i_Value < i_MinValue || i_Value > i_MaxValue)
             {
                 throw new ValueOutOfRangeException(i_Value, i_MinValue, i_MaxValue);
+            }
+        }
+
+        public static void ValidRange(float i_Value, float i_MinValue)
+        {
+            if (i_Value < i_MinValue)
+            {
+                throw new ValueOutOfRangeException(i_Value, i_MinValue);
             }
         }
 
@@ -37,16 +47,58 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public static float ValidateAndParseFloat(string i_FieldValue)
+        public static float ValidateAndParseFloat(string i_FloatValue)
         {
             float floatNumber;
 
-            if (!float.TryParse(i_FieldValue, out floatNumber))
+            if (!float.TryParse(i_FloatValue, out floatNumber))
             {
-                throw new FormatException("Not a valid fuel amount");
+                throw new FormatException("Unvalid choice. Please enter a number");
             }
 
             return floatNumber;
+        }
+
+        public static int ValidateAndParseInt(string i_FloatValue)
+        {
+            int intNumber;
+
+            if (!int.TryParse(i_FloatValue, out intNumber))
+            {
+                throw new FormatException("Unvalid choice. Please enter an integer number");
+            }
+
+            return intNumber;
+        }
+
+        public static bool ValidateAndParseBool(string i_FloatValue)
+        {
+            bool boolValue = true;
+            
+            switch(i_FloatValue.ToLower())
+            {
+                case "yes":
+                    break;
+                case "no":
+                    boolValue = !boolValue;
+                    break;
+                default:
+                    throw new FormatException("Unvalid choice. Please enter Yes / No");
+            }
+
+            return boolValue;
+        }
+
+        public static T ValidateAndParseEnum<T>(string i_EnumValue) where T : struct
+        {
+            T enumValue;
+
+            if(!Enum.TryParse<T>(i_EnumValue, out enumValue) || !Enum.GetNames(typeof(T)).Contains(i_EnumValue))
+            {
+                throw new FormatException(string.Format("Unvalid Choice. Enter one of the following: {0}", GarageManager.ListEnumValues<T>()));
+            }
+
+            return enumValue;
         }
     }
 }

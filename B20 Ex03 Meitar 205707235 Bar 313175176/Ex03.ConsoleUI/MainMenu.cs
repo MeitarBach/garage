@@ -95,7 +95,7 @@ namespace Ex03.ConsoleUI
         private eVehicleType getVehicleTypeFromUser()
         {
             MessageDisplayer.DisplayMessage(MessageDisplayer.ChooseVehicleType);
-            MessageDisplayer.ListVehicleTypes();
+            MessageDisplayer.ListEnumValues<eVehicleType>();
             int numOfVehicleTypes = Enum.GetNames(typeof(eVehicleType)).Length;
             int vehicleTypeChosen = getOptionFromUser(numOfVehicleTypes);
             eVehicleType vehicleType = (eVehicleType)vehicleTypeChosen;
@@ -106,10 +106,9 @@ namespace Ex03.ConsoleUI
         private void setVehicleProperties(Vehicle i_Vehicle)
         {
             i_Vehicle.VehicleStatus = eVehicleStatus.InRepair;
-            Dictionary<string, string> emptyParametersDictionary =
-                r_VehicleFactory.GetEmptyParameterDictionary(i_Vehicle.VehicleType);
+            List<string> parametersList = r_VehicleFactory.GetExtendedParametersList(i_Vehicle.VehicleType);
 
-            foreach(string parameterKey in emptyParametersDictionary.Keys)
+            foreach (string parameterKey in parametersList)
             {
                 bool v_InvalidInput = true;
 
@@ -121,7 +120,6 @@ namespace Ex03.ConsoleUI
                     try
                     {
                         r_VehicleFactory.SetFieldValue(i_Vehicle, parameterKey, parameterValue);
-                        Console.WriteLine(i_Vehicle);
                         break;
                     }
                     catch(ValueOutOfRangeException e)
@@ -135,6 +133,10 @@ namespace Ex03.ConsoleUI
                 }
                 
             }
+
+            MessageDisplayer.DisplayMessage(MessageDisplayer.InsertedVehicle);
+            Console.WriteLine(i_Vehicle.ToString());
+            enterToContinue();
 
 
 

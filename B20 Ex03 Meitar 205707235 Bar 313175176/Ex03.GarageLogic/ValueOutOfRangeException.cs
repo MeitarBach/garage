@@ -15,6 +15,13 @@ namespace Ex03.GarageLogic
             r_MaxValue = i_MaxValue;
         }
 
+        public ValueOutOfRangeException(float i_SentValue, float i_MinValue)
+            : base(string.Format("Invalid value: {0}. The value has to be larger than {1}",
+                i_SentValue, i_MinValue))
+        {
+            r_MinValue = i_MinValue;
+        }
+
         public float MinValue
         {
             get

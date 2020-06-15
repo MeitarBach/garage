@@ -31,6 +31,7 @@ namespace Ex03.GarageLogic
             r_LicenseNumber = i_LicenseNumber;
             r_ModelName = i_ModelName;
             r_WheelsList = new List<Wheel>();
+            m_Owner = new VehicleOwner();
             m_Engine = i_Engine;
             m_VehicleStatus = eVehicleStatus.InRepair;
         }
@@ -72,6 +73,14 @@ namespace Ex03.GarageLogic
             foreach(Wheel wheel in r_WheelsList)
             {
                 wheel.CurrentAirPressure = i_CurrentPressure;
+            }
+        }
+
+        public void SetWheelsManufacturer(string i_WheelsManufacturer)
+        {
+            foreach (Wheel wheel in r_WheelsList)
+            {
+                wheel.Manufacturer = i_WheelsManufacturer;
             }
         }
 
@@ -139,6 +148,7 @@ namespace Ex03.GarageLogic
             foreach(Wheel wheel in r_WheelsList)
             {
                 wheelsSpecifaction.Append(Environment.NewLine);
+                wheelsSpecifaction.Append("\t");
                 wheelsSpecifaction.Append(wheel);
             }
 

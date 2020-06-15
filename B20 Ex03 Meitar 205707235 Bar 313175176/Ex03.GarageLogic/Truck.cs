@@ -10,6 +10,7 @@ namespace Ex03.GarageLogic
     {
         private bool m_ContainsDangerousMaterials;
         private float m_VolumeOfCargo;
+        private const float k_MinVolumeOfCargo = 0;
 
         public Truck(string i_LicenseNumber, string i_ModelName, Engine i_Engine)
             : base(i_LicenseNumber, i_ModelName, i_Engine)
@@ -38,6 +39,7 @@ namespace Ex03.GarageLogic
 
             set
             {
+                Validation.ValidRange(value, k_MinVolumeOfCargo);
                 m_VolumeOfCargo = value;
             }
         }

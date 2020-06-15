@@ -19,7 +19,7 @@ namespace B20_Ex02
         private const string k_ChooseVehicleType = "Choose your vehicle type:";
         private const string k_InsertModelName = "Insert vehicle's Model:";
         private const string k_VehicleIsInGarage = "The vehicle is already in the garage";
-        private const string k_EnterBoardWidth = "Please enter the board's width: (4-6)";
+        private const string k_InsertedVehicle = "The vehicle was successfully inserted:";
         private const string k_EnterBoardHeight = "Please enter the board's height: (4-6)";
         private const string k_NotANumber = "Invalid input: Not a Number";
         private const string k_InvalidWidth = "Invalid Width: Not in range 4-6";
@@ -42,19 +42,21 @@ namespace B20_Ex02
             Console.WriteLine("Invalid option range, choose an option between 1-{0}", i_MaxOptionNumber);
         }
 
-        internal static void ListVehicleTypes()
+        internal static void ListEnumValues<T>()
         {
-            StringBuilder vehicleTypesStringBuilder = new StringBuilder();
+            StringBuilder enumValuesStringBuilder = new StringBuilder(); 
+            string[] enumValues = Enum.GetNames(typeof(T));
 
-            int i = 1;
-            foreach(string vehicleType in Enum.GetNames(typeof(eVehicleType)))
+            for(int i = 0 ; i < enumValues.Length ; i++)
             {
-                vehicleTypesStringBuilder.Append(string.Format("{0}. {1}", i, vehicleType));
-                vehicleTypesStringBuilder.Append(Environment.NewLine);
-                i++;
+                enumValuesStringBuilder.Append(string.Format("{0}. {1}", i + 1, enumValues[i]));
+                if(enumValues.Length - 1 != i)
+                {
+                    enumValuesStringBuilder.Append(Environment.NewLine);
+                }
             }
 
-            Console.WriteLine(vehicleTypesStringBuilder.ToString());
+            Console.WriteLine(enumValuesStringBuilder.ToString());
         }
 
         internal static string Welcome
@@ -105,11 +107,11 @@ namespace B20_Ex02
             }
         }
 
-        internal static string EnterBoardWidth
+        internal static string InsertedVehicle
         {
             get
             {
-                return k_EnterBoardWidth;
+                return k_InsertedVehicle;
             }
         }
 
