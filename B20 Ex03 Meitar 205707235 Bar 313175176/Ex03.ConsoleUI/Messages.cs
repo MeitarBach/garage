@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Text;
-using Ex03.GarageLogic;
 
 namespace B20_Ex02
 {

@@ -137,11 +137,7 @@ namespace Ex03.ConsoleUI
                         r_VehicleFactory.SetFieldValue(i_Vehicle, parameterKey, parameterValue);
                         break;
                     }
-                    catch(ValueOutOfRangeException e)
-                    {
-                        Console.WriteLine(e.Message);
-                    }
-                    catch(FormatException e)
+                    catch(Exception e)
                     {
                         Console.WriteLine(e.Message);
                     }
@@ -213,7 +209,7 @@ namespace Ex03.ConsoleUI
                         Messages.ClearAndDisplayMessage(Messages.StatusHasBeenChanged);
                         break;
                     }
-                    catch (FormatException e)
+                    catch (Exception e)
                     {
                         Console.WriteLine(e.Message);
                     }

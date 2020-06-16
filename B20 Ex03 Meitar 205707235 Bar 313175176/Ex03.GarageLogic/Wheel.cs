@@ -1,7 +1,4 @@
-﻿using System;
-using System.Runtime.Serialization;
-
-namespace Ex03.GarageLogic
+﻿namespace Ex03.GarageLogic
 {
     public class Wheel
     {
@@ -58,7 +55,7 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return string.Format("Manufacturer: {0},  Air Pressure: {1}", m_Manufacturer, m_CurrentAirPressure);
+            return string.Format("Manufacturer: {0},  Air Pressure: {1}/{2} psi", m_Manufacturer, m_CurrentAirPressure, r_MaxAirPressure);
         }
     }
 }

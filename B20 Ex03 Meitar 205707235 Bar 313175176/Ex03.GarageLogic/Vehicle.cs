@@ -112,7 +112,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public VehicleFactory.eVehicleType VehicleType
+        public eVehicleType VehicleType
         {
             get
             {
@@ -163,16 +163,15 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            string ownerName = Owner == null ? string.Empty : Owner.Name;
             string description = string.Format(
 @"License Number: {0}
 Vehicle Type: {1}
 Model: {2}
-Owner: {3}
+{3}
 Status: {4}
 Tires specifications:{5}
 {6}
-Energy Percentage: {7:0.00}%", r_LicenseNumber, m_VehicleType, r_ModelName, ownerName, m_VehicleStatus, wheelsSpecification(), m_Engine, RemainingEnergyPercentage);
+Energy Percentage: {7:0.00}%", r_LicenseNumber, m_VehicleType, r_ModelName, m_Owner, m_VehicleStatus, wheelsSpecification(), m_Engine, RemainingEnergyPercentage);
 
             return description;
         }
