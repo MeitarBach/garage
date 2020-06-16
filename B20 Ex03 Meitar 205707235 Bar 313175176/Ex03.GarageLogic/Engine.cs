@@ -17,11 +17,11 @@
             }
         }
 
-        public static float CalcEnergyPercantage(float i_CurrentEnergyAmount, float i_MaxEnergyAnount)
+        public static float CalcEnergyPercentage(float i_CurrentEnergyAmount, float i_MaxEnergyAmount)
         {
-            return (i_CurrentEnergyAmount / i_MaxEnergyAnount) * 100;
+            return (i_CurrentEnergyAmount / i_MaxEnergyAmount) * 100;
         }
 
-        public abstract void UpdateEnergyPercantage();
+        public abstract void UpdateEnergyPercentage();
     }
 }

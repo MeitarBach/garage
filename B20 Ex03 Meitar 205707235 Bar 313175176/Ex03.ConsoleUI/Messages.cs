@@ -4,7 +4,7 @@ using Ex03.GarageLogic;
 
 namespace B20_Ex02
 {
-    internal class MessageDisplayer
+    internal class Messages
     {
         private const string k_Welcome = "Welcome to Meitar&Bar's Garage!";
         private const string k_MainMenuMessage =
@@ -16,7 +16,7 @@ namespace B20_Ex02
 5. Fill vehicle energy source (fuel or electric)
 6. Display vehicle information
 7. Exit";
-        private const string k_InsertLicneseNumber = "Insert vehicle License Number";
+        private const string k_InsertLicenseNumber = "Insert vehicle License Number";
         private const string k_ChooseVehicleType = "Choose your vehicle type:";
         private const string k_InsertModelName = "Insert vehicle's Model:";
         private const string k_VehicleIsInGarage = "The vehicle is already in the garage";
@@ -64,11 +64,11 @@ namespace B20_Ex02
             }
         }
         
-        internal static string InsertLicneseNumber
+        internal static string InsertLicenseNumber
         {
             get
             {
-                return k_InsertLicneseNumber;
+                return k_InsertLicenseNumber;
             }
         }
         

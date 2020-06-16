@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using static Ex03.GarageLogic.VehicleFactory;
 
 namespace Ex03.GarageLogic
 {
@@ -111,7 +112,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public eVehicleType VehicleType
+        public VehicleFactory.eVehicleType VehicleType
         {
             get
             {
@@ -148,15 +149,16 @@ namespace Ex03.GarageLogic
 
         private string wheelsSpecification()
         {
-            StringBuilder wheelsSpecifaction = new StringBuilder();
+            StringBuilder wheelsSpecification = new StringBuilder();
+
             foreach(Wheel wheel in r_WheelsList)
             {
-                wheelsSpecifaction.Append(Environment.NewLine);
-                wheelsSpecifaction.Append("\t");
-                wheelsSpecifaction.Append(wheel);
+                wheelsSpecification.Append(Environment.NewLine);
+                wheelsSpecification.Append("\t");
+                wheelsSpecification.Append(wheel);
             }
 
-            return wheelsSpecifaction.ToString();
+            return wheelsSpecification.ToString();
         }
 
         public override string ToString()

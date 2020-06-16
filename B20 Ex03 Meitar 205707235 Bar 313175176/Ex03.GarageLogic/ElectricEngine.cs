@@ -30,7 +30,7 @@ namespace Ex03.GarageLogic
             {
                 Validation.ValidRange(value, k_MinTimeInHours, r_MaxTimeInHours);
                 m_RemainingTimeInHours = value;
-                UpdateEnergyPercantage();
+                UpdateEnergyPercentage();
             }
         }
 
@@ -42,9 +42,9 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public override void UpdateEnergyPercantage()
+        public override void UpdateEnergyPercentage()
         {
-            EnergyPercentage = CalcEnergyPercantage(m_RemainingTimeInHours, r_MaxTimeInHours);
+            EnergyPercentage = CalcEnergyPercentage(m_RemainingTimeInHours, r_MaxTimeInHours);
         }
 
         public override string ToString()

@@ -45,15 +45,6 @@ namespace Ex03.GarageLogic
         Five
     }
 
-    public enum eVehicleType
-    {
-        FuelBasedMotorcycle = 1,
-        ElectricMotorcycle,
-        FuelBasedCar,
-        ElectricCar,
-        FuelBasedTruck,
-    }
-
     public class EnumOperations
     {
         public static string ListEnumValues<T>(bool i_ListWithNumbers)

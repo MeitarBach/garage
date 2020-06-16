@@ -49,9 +49,7 @@ namespace Ex03.GarageLogic
 
         public static float ValidateAndParseFloat(string i_FloatValue)
         {
-            float floatNumber;
-
-            if (!float.TryParse(i_FloatValue, out floatNumber))
+            if (!float.TryParse(i_FloatValue, out float floatNumber))
             {
                 throw new FormatException("Invalid choice. Please enter a number");
             }
@@ -61,9 +59,7 @@ namespace Ex03.GarageLogic
 
         public static int ValidateAndParseInt(string i_FloatValue)
         {
-            int intNumber;
-
-            if (!int.TryParse(i_FloatValue, out intNumber))
+            if (!int.TryParse(i_FloatValue, out int intNumber))
             {
                 throw new FormatException("Invalid choice. Please enter an integer number");
             }
@@ -91,9 +87,7 @@ namespace Ex03.GarageLogic
 
         public static T ValidateAndParseEnum<T>(string i_EnumValue) where T : struct
         {
-            T enumValue;
-
-            if(!Enum.TryParse<T>(i_EnumValue, out enumValue) || !Enum.GetNames(typeof(T)).Contains(i_EnumValue))
+            if(!Enum.TryParse<T>(i_EnumValue, out T enumValue) || !Enum.GetNames(typeof(T)).Contains(i_EnumValue))
             {
                 bool enumListWithNumbers = false;
                 throw new FormatException(string.Format("Invalid Choice. Enter one of the following: {0}", EnumOperations.ListEnumValues<T>(enumListWithNumbers)));

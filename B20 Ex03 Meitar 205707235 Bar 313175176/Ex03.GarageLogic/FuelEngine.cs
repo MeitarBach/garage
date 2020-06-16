@@ -41,7 +41,7 @@ namespace Ex03.GarageLogic
             {
                 Validation.ValidRange(value, k_MinFuelAmount, r_MaxFuelAmount);
                 m_CurrentFuelAmount = value;
-                UpdateEnergyPercantage();
+                UpdateEnergyPercentage();
             }
         }
 
@@ -53,9 +53,9 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public override void UpdateEnergyPercantage()
+        public override void UpdateEnergyPercentage()
         {
-            EnergyPercentage = CalcEnergyPercantage(m_CurrentFuelAmount, r_MaxFuelAmount);
+            EnergyPercentage = CalcEnergyPercentage(m_CurrentFuelAmount, r_MaxFuelAmount);
         }
 
         public override string ToString()

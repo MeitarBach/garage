@@ -5,6 +5,15 @@ namespace Ex03.GarageLogic
 {
     public class VehicleFactory
     {
+        public enum eVehicleType
+        {
+            FuelBasedMotorcycle = 1,
+            ElectricMotorcycle,
+            FuelBasedCar,
+            ElectricCar,
+            FuelBasedTruck,
+        }
+
         //// Car constants
         private const float k_ElectricCarMaxHours = 2.1f;
         private const float k_CarMaxFuel = 60f;

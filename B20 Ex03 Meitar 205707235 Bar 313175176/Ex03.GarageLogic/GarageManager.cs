@@ -45,6 +45,7 @@ namespace Ex03.GarageLogic
         public string DisplayAllVehicles()
         {
             StringBuilder vehiclesStringBuilder = new StringBuilder();
+
             foreach(eVehicleStatus vehicleStatus in Enum.GetValues(typeof(eVehicleStatus)))
             {
                 vehiclesStringBuilder.Append(DisplayVehiclesByStatus(vehicleStatus));
@@ -79,7 +80,7 @@ namespace Ex03.GarageLogic
             return vehicleInGarage;
         }
 
-        public bool RefuleVehicle(string i_LicenseNumber, eFuelType i_FuelType, float i_FuelAmountToAdd)
+        public bool RefuelVehicle(string i_LicenseNumber, eFuelType i_FuelType, float i_FuelAmountToAdd)
         {
             Vehicle vehicle;
             bool vehicleInGarage = FindVehicle(i_LicenseNumber, out vehicle);
@@ -90,13 +91,13 @@ namespace Ex03.GarageLogic
             return vehicleInGarage;
         }
 
-        public bool RechargeVehicle(string i_LicenseNumber, float i_MintuesToCharge)
+        public bool RechargeVehicle(string i_LicenseNumber, float i_MinutesToCharge)
         {
             Vehicle vehicle;
             bool vehicleInGarage = FindVehicle(i_LicenseNumber, out vehicle);
 
             Validation.ValidElectricVehicle(vehicle);
-            float hoursToCharge = i_MintuesToCharge / 60;
+            float hoursToCharge = i_MinutesToCharge / 60;
             (vehicle.Engine as ElectricEngine).Recharge(hoursToCharge);
 
             return vehicleInGarage;
