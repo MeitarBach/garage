@@ -5,10 +5,10 @@ namespace Ex03.GarageLogic
 {
     public class Wheel
     {
+        private const float k_MinAirPressure = 0;
+        private readonly float r_MaxAirPressure;
         private string m_Manufacturer;
         private float m_CurrentAirPressure;
-        private readonly float r_MaxAirPressure;
-        private const float k_MinAirPressure = 0;
 
         public Wheel(float i_MaxAirPressure)
         {
@@ -27,6 +27,7 @@ namespace Ex03.GarageLogic
             {
                 return m_Manufacturer;
             }
+
             set
             {
                 m_Manufacturer = value;
@@ -39,6 +40,7 @@ namespace Ex03.GarageLogic
             {
                 return m_CurrentAirPressure;
             }
+
             set
             {
                 Validation.ValidRange(value, k_MinAirPressure, r_MaxAirPressure);

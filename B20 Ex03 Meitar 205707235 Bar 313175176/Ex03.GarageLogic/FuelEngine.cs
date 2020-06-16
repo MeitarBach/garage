@@ -4,10 +4,10 @@ namespace Ex03.GarageLogic
 {
     public class FuelEngine : Engine
     {
-        private readonly eFuelType r_FuelType;
-        private float m_CurrentFuelAmount;
-        private readonly float r_MaxFuelAmount;
         private const float k_MinFuelAmount = 0;
+        private readonly eFuelType r_FuelType;
+        private readonly float r_MaxFuelAmount;
+        private float m_CurrentFuelAmount;
 
         public FuelEngine(eFuelType i_FuelType, float i_MaxFuelAmount)
         {

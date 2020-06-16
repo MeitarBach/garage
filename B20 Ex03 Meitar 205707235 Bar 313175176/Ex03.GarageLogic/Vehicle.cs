@@ -20,6 +20,7 @@ namespace Ex03.GarageLogic
             {
                 return m_Engine.EnergyPercentage;
             }
+
             set
             {
                 m_Engine.EnergyPercentage = value;
@@ -90,6 +91,7 @@ namespace Ex03.GarageLogic
             {
                 return m_Owner;
             }
+
             set
             {
                 m_Owner = value;
@@ -102,6 +104,7 @@ namespace Ex03.GarageLogic
             {
                 return m_VehicleStatus;
             }
+
             set
             {
                 m_VehicleStatus = value;
@@ -114,6 +117,7 @@ namespace Ex03.GarageLogic
             {
                 return m_VehicleType;
             }
+
             set
             {
                 m_VehicleType = value;
@@ -166,7 +170,7 @@ Owner: {3}
 Status: {4}
 Tires specifications:{5}
 {6}
-Energy Percentage:{7:0.00}%", r_LicenseNumber, m_VehicleType, r_ModelName, ownerName, m_VehicleStatus, wheelsSpecification(), m_Engine, RemainingEnergyPercentage);
+Energy Percentage: {7:0.00}%", r_LicenseNumber, m_VehicleType, r_ModelName, ownerName, m_VehicleStatus, wheelsSpecification(), m_Engine, RemainingEnergyPercentage);
 
             return description;
         }

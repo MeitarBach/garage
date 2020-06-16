@@ -31,6 +31,7 @@ namespace Ex03.GarageLogic
             {
                 return m_EngineVolume;
             }
+
             set
             {
                 m_EngineVolume = value;
@@ -39,9 +40,10 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return string.Format(base.ToString() + Environment.NewLine + 
-@"License Type: {0}
-Engine Volume: {1}", m_LicenseType, m_EngineVolume);
+            return string.Format(
+@"{0}
+License Type: {1}
+Engine Volume: {2}", base.ToString(), m_LicenseType, m_EngineVolume);
         }
     }
 }

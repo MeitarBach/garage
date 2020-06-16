@@ -8,9 +8,9 @@ namespace Ex03.GarageLogic
 {
     public class Truck : Vehicle
     {
+        private const float k_MinVolumeOfCargo = 0;
         private bool m_ContainsDangerousMaterials;
         private float m_VolumeOfCargo;
-        private const float k_MinVolumeOfCargo = 0;
 
         public Truck(string i_LicenseNumber, string i_ModelName, Engine i_Engine)
             : base(i_LicenseNumber, i_ModelName, i_Engine)
@@ -53,9 +53,10 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return string.Format(base.ToString() + Environment.NewLine +
-@"The truck {0} dagerous materials
-Volume of Cargo: {1}", ContainsDagerousMaterialsOrNot(), m_VolumeOfCargo);
+            return string.Format(
+@"{0}
+The truck {1} dagerous materials
+Volume of Cargo: {2}", base.ToString(), ContainsDagerousMaterialsOrNot(), m_VolumeOfCargo);
         }
     }
 }

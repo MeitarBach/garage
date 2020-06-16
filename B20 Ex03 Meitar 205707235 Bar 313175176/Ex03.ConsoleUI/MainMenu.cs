@@ -145,7 +145,6 @@ namespace Ex03.ConsoleUI
                         Console.WriteLine(e.Message);
                     }
                 }
-                
             }
 
             MessageDisplayer.ClearAndDisplayMessage(MessageDisplayer.InsertedVehicle);
@@ -188,6 +187,7 @@ namespace Ex03.ConsoleUI
             {
                 listOfVehiclesToDisplay = MessageDisplayer.EmptyList;
             }
+
             printAndEnterToContinue(listOfVehiclesToDisplay);
         }
 

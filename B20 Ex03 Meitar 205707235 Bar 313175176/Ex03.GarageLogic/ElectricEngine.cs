@@ -4,10 +4,10 @@ namespace Ex03.GarageLogic
 {
     public class ElectricEngine : Engine
     {
-        private float m_RemainingTimeInHours;
-        private readonly float r_MaxTimeInHours;
         private const float k_MinTimeInHours = 0;
-
+        private readonly float r_MaxTimeInHours;
+        private float m_RemainingTimeInHours;
+        
         public ElectricEngine(float i_MaxTimeInHours) 
         {
             r_MaxTimeInHours = i_MaxTimeInHours;

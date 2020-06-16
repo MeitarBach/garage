@@ -18,6 +18,7 @@ namespace Ex03.GarageLogic
             {
                 return m_Color;
             }
+
             set
             {
                 m_Color = value;
@@ -30,6 +31,7 @@ namespace Ex03.GarageLogic
             {
                 return m_NumOfDoors;
             }
+
             set
             {
                 m_NumOfDoors = value;
@@ -38,9 +40,10 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return string.Format(base.ToString() + Environment.NewLine +
-@"Car Color: {0}
-Number Of Doors: {1}", m_Color, m_NumOfDoors);
+            return string.Format(
+@"{0}
+Car Color: {1}
+Number Of Doors: {2}", base.ToString(), m_Color, m_NumOfDoors);
         }
     }
 }
